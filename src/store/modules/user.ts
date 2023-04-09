@@ -1,15 +1,9 @@
 import { Module } from 'vuex';
 
-import { UserProfile, RootState } from '@/types/storeInterface'
-
-export interface UserState {
-  token: string;
-  cookie: string;
-  showLogin: boolean;
-  profile: UserProfile;
-}
+import { UserProfile, RootState, UserState } from '@/types/store-types'
 
 const userStore: Module<UserState, RootState> = {
+  namespaced: true,
   state: {
     token: '',
     cookie: '',

@@ -1,12 +1,18 @@
 import { createStore, Store } from 'vuex';
 
-import { RootState } from '@/types/storeInterface'
-import user from './modules/user'
+import getters from './getters';
+import { RootState } from '@/types/store-types';
+import user from './modules/user';
+import layout from './modules/layout';
+import search from './modules/search';
 
 const store: Store<RootState> = createStore ({
   modules: {
-    user
-  }
+    user,
+    layout,
+    search
+  },
+  getters
 })
 
 export default store;

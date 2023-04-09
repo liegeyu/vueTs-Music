@@ -1,0 +1,72 @@
+.bg-main {
+ background-color: #171718;
+}
+
+.bg-vice {
+  background-color: #1e1e1f;
+}
+
+.bg-opacity {
+  opacity: .7;
+}
+
+.text-main {
+  color: #e2e8f0;
+}
+
+.active {
+  cursor: default;
+  background-image: linear-gradient(to right, #2dd4bf, #34d399);
+  color: #f8fafc;
+}
+
+.bg-hover-main {
+  background-color: #44403c;
+}
+
+.icon-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #fff;
+}
+
+.icon-button:hover {
+  color: #2fa67b;
+}
+
+// poper-container
+.popper-container {
+  width: 280px !important;
+  background: #1e1e1f !important;
+  padding: 0 !important;
+}
+
+.el-popper.is-light .el-popper__arrow::before {
+  background: #1e1e1f !important;
+}
+
+// poper-card
+.popper-card {
+  height: 24rem;
+  color: #e2e8f0;
+  .popover-title {
+    font-size: 1.25rem;
+    padding: 0.5rem 0.625rem 0.375rem;
+  }
+
+  .popover-content {
+    cursor: pointer;
+    padding: 0.625rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      color: #34d399;
+    }
+
+    .popo-right {
+      color: #fca5a5;
+    }
+  }
+}

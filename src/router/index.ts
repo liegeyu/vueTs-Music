@@ -11,7 +11,40 @@ const routes: RouteRecordRaw[] = [
         path: '/home',
         name: 'home',
         component: () => import('@/views/Home/index.vue'),
-      }
+        meta: {
+          menu: 'home',
+          keepAlive: true,
+        }
+      },
+      {
+        path: '/music',
+        name: 'music',
+        component: () => import('@/views/Music/index.vue'),
+        meta: {
+          menu: 'music',
+        },
+        children: []
+      },
+      {
+        path: '/video',
+        name: 'video',
+        component: () => import('@/views/Video/index.vue'),
+        meta: {
+          menu: 'video',
+          title: '视频',
+          keepAlive: true,
+        }
+      },
+      {
+        path: '/dj',
+        name: 'dj',
+        component: () => import('@/views/Dj/index.vue'),
+        meta: {
+          menu: 'dj',
+          title: '电台',
+          keepAlive: true,
+        }
+      },
     ]
   }
 ]

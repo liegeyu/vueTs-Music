@@ -1,6 +1,16 @@
 // 定义接口 interface
 // vuex 相关
+import { Menus } from '@/types/layout-types'
+
 export interface RootState {}
+
+export interface UserState {
+  token: string;
+  cookie: string;
+  showLogin: boolean;
+  profile: UserProfile;
+}
+
 export interface UserProfile {
   userId: number;
 	userType: number;
@@ -39,4 +49,11 @@ export interface UserProfile {
 	authenticationTypes: number;
 	avatarDetail?: any;
 	anchor: boolean;
+}
+
+export interface LayoutState {
+  menus: Menus[]
+}
+
+export interface SearchState {
 }

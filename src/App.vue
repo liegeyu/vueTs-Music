@@ -1,5 +1,4 @@
 <template>
-  <el-button>Default</el-button>
   <router-view />
 </template>
 
