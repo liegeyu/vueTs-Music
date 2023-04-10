@@ -35,13 +35,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, defineComponent } from "vue";
+import { ref, onMounted, Ref, defineComponent } from "vue";
 import { Search } from "@icon-park/vue-next";
+import { getSearchHot } from "@/service/modules/search";
 
 let showSearchView: Ref<boolean> = ref(false);
 let searchValue: Ref<string> = ref("");
 
 const searchInput = () => {};
+
+onMounted(async () => {
+  const res = await getSearchHot();
+  console.log(res.data);
+});
 </script>
 
 <style lang="scss" scoped></style>
