@@ -36,7 +36,7 @@
 
 // poper-container
 .popper-container {
-  width: 280px !important;
+  width: 260px !important;
   background: #1e1e1f !important;
   padding: 0 !important;
 }
@@ -60,6 +60,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 0.9rem;
 
     &:hover {
       color: #34d399;
@@ -68,5 +69,25 @@
     .popo-right {
       color: #fca5a5;
     }
+  }
+}
+
+.dialog-container {
+  background-color: #1e1e1f !important;
+}
+
+.el-dialog__title {
+  color: #fff !important;
+}
+
+.el-input__wrapper {
+  background-color: #1e1e1f !important;
+  box-shadow: 0 0 0 1px #57534e !important;
+  &:hover {
+    box-shadow: 0 0 0 1px #fff !important;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 1px #34d399 !important;
   }
 }

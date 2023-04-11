@@ -17,7 +17,9 @@
         <SearchPopo />
       </div>
     </div>
-    <div class="headerBar-right"></div>
+    <div class="headerBar-right">
+      <UserLogin />
+    </div>
   </div>
 </template>
 
@@ -27,9 +29,10 @@ import { useStore, Store } from "vuex";
 
 import IconPark from "@/components/common/IconPark.vue";
 import SearchPopo from "./components/SearchPopo.vue";
+import UserLogin from "./components/UserLogin.vue";
 import { Left, Right } from "@icon-park/vue-next";
 
-const store: Store<any> = useStore();
+const store = useStore();
 const iconSize = 24;
 </script>
 

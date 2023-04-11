@@ -36,9 +36,9 @@ import IconPack from "@/components/common/IconPark.vue";
 
 import { MenuItem, Menus } from "@/types/layout-types";
 
-const route: RouteLocationNormalizedLoaded = useRoute();
-const router: Router = useRouter();
-const store: Store<any> = useStore();
+const route = useRoute();
+const router = useRouter();
+const store = useStore();
 const currentKey = ref(route.meta.menu);
 let menus: Menus[] = reactive([]);
 

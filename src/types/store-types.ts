@@ -1,6 +1,7 @@
 // 定义接口 interface
 // vuex 相关
 import { Menus } from '@/types/layout-types'
+import { SearchSuggest } from '@/types/store-types'
 
 export interface RootState {}
 
@@ -52,8 +53,10 @@ export interface UserProfile {
 }
 
 export interface LayoutState {
-  menus: Menus[]
+  menus: Menus[];
 }
 
 export interface SearchState {
+	searchValue: string;
+	suggestData: SearchSuggest;
 }

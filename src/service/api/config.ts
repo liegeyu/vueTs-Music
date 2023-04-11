@@ -1,3 +1,3 @@
-export const BASE_URL: string = 'http://localhost:3000';
+export const BASE_URL: string = 'http://8.134.112.129:3050';
 
 export const TIMEOUT: number = 5000;

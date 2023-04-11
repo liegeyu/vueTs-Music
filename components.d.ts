@@ -10,6 +10,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
@@ -21,6 +23,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchPopo: typeof import('./src/components/layout/header/components/SearchPopo.vue')['default']
-    UserInfo: typeof import('./src/components/layout/header/components/UserInfo.vue')['default']
+    SearchSuggest: typeof import('./src/components/layout/header/components/SearchSuggest.vue')['default']
+    UserLogin: typeof import('./src/components/layout/header/components/UserLogin.vue')['default']
   }
 }

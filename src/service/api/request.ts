@@ -48,23 +48,34 @@ axiosIns.interceptors.response.use(
   }
 );
 
-// request
-export function request(config: AxiosRequestConfig) {
-  return new Promise((resolve, reject) => {
-    axiosIns.request(config)
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      })
-  })
+interface _Request {
+  request<T>(config: AxiosRequestConfig): Promise<T>;
+
+  get<T>(config: AxiosRequestConfig): Promise<T>;
+
+  post<T>(config: AxiosRequestConfig): Promise<T>;
 }
 
-export function get(config: AxiosRequestConfig, method = 'get') {
-  return request({ ...config, method })
+const Request: _Request = {
+  request(config: AxiosRequestConfig) {
+    return new Promise((resolve, reject) => {
+      axiosIns.request(config)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err);
+        })
+    })
+  },
+
+  get(config: AxiosRequestConfig, method = 'get') {
+    return this.request({ ...config, method })
+  },
+  
+  post(config: AxiosRequestConfig, method = 'post') {
+    return this.request({ ...config, method })
+  }  
 }
 
-export function post(config: AxiosRequestConfig, method = 'post') {
-  return request({ ...config, method })
-}
+export default Request;

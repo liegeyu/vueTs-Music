@@ -1,12 +1,16 @@
 // search 相关 api
-import { get, post } from "../api/request"
-
-interface ApiRes {
-  code: boolean;
-}
+import Request from "../api/request"
+import { ApiRes, SearchHotData, SearchSuggest } from '@/types/search-types'
 
 export const getSearchHot = () => {
-  return get({
+  return Request.get<ApiRes<SearchHotData[]>>({
     url: '/search/hot/detail',
+  })
+}
+
+export const getSearchHotSuggest = (params) => {
+  return Request.get<ApiRes<SearchSuggest[]>>({
+    url: "/search/suggest",
+    params
   })
 }
