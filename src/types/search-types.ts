@@ -1,11 +1,4 @@
 // 搜索相关 interface
-export interface ApiRes<T> {
-  code: boolean;
-  data?: T;
-  result?: T;
-  message?: string;
-}
-
 export interface SearchHotData {
 	searchWord: string;
 	score: number;

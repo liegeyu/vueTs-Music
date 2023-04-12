@@ -58,6 +58,7 @@ const loginSubmit = () => {};
 <style lang="scss" scoped>
 .login-container {
   color: #fff;
+  margin-right: 0.8rem;
   display: flex;
   align-items: center;
   cursor: pointer;

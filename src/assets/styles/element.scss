@@ -1,0 +1,38 @@
+// poper-container
+.el-popper.is-light .el-popper__arrow::before {
+  background: #1e1e1f !important;
+}
+
+.el-popover.el-popper {
+  border: 1px solid #474648 !important;
+}
+
+// dialog
+.el-dialog__title {
+  color: #fff !important;
+}
+
+.el-input__wrapper {
+  background-color: #1e1e1f !important;
+  box-shadow: 0 0 0 1px #57534e !important;
+  &:hover {
+    box-shadow: 0 0 0 1px #fff !important;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 1px #34d399 !important;
+  }
+}
+
+// carousel
+.el-carousel__item {
+  // transform: translateX(50%) scale(0.83) !important;
+}
+
+.is-active {
+  // transform: translateX(313.5px) scale(1) !important;
+}
+
+.is-in-stage {
+  // transform: translateX(-53.295px) scale(0.83) !important;
+}

@@ -28,3 +28,5 @@ interface MyIconPark {
 
 const props = defineProps<MyIconPark>();
 </script>
+
+<style lang="scss" scoped></style>

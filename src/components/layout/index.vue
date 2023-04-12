@@ -7,7 +7,7 @@
       <div class="app-header">
         <Header />
       </div>
-      <div class="app-content">
+      <div class="app-content bg-vice">
         <el-scrollbar>
           <div class="main-content">
             <router-view></router-view>
@@ -33,6 +33,7 @@ import Drawer from "./drawer/index.vue";
 .app-wrapper {
   width: 100vw;
   height: 100vh;
+  min-width: 1300px;
   display: flex;
   align-items: stretch;
   overflow: hidden;
@@ -56,6 +57,11 @@ import Drawer from "./drawer/index.vue";
       flex: 1;
 
       .main-content {
+        width: 100%;
+        min-width: 1100px;
+        max-width: 1536px;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
 

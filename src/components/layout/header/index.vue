@@ -19,21 +19,43 @@
     </div>
     <div class="headerBar-right">
       <UserLogin />
+      <IconPark
+        :icon="Mail"
+        :size="iconSize"
+        :stroke-width="2"
+        class="icon-button"
+      />
+      <IconPark
+        :icon="Platte"
+        :size="iconSize"
+        :stroke-width="2"
+        class="icon-button"
+      />
+      <IconPark
+        :icon="HamburgerButton"
+        :size="iconSize"
+        :stroke-width="2"
+        class="icon-button"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useStore, Store } from "vuex";
 
 import IconPark from "@/components/common/IconPark.vue";
 import SearchPopo from "./components/SearchPopo.vue";
 import UserLogin from "./components/UserLogin.vue";
-import { Left, Right } from "@icon-park/vue-next";
+import {
+  Left,
+  Right,
+  Mail,
+  Platte,
+  HamburgerButton,
+} from "@icon-park/vue-next";
 
-const store = useStore();
-const iconSize = 24;
+const iconSize = 22;
 </script>
 
 <style lang="scss" scoped>
