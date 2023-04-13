@@ -30,10 +30,11 @@ defineProps({
 <style lang="scss" scoped>
 .lead-title {
   color: #fff;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   line-height: 1.75rem;
-  padding: 0.75rem 0;
+  padding: 1.45rem 0 0.75rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 </style>
