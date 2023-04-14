@@ -1,7 +1,7 @@
 // 推荐 home 页面相关 api
 import Request from "../api/request";
 import { ApiRes } from "@/types/common-types";
-import { Banner, Personalized, NewSong } from "@/types/recommend-types";
+import { Banner, Personalized, NewSong, PersonalizedMv } from "@/types/recommend-types";
 
 
 export const getBanner = (params) => {
@@ -21,5 +21,11 @@ export const getNewSong = (params) => {
   return Request.get<ApiRes<NewSong[]>>({
     url: '/personalized/newsong',
     params
+  })
+}
+
+export const getPersonalizedMV = () => {
+  return Request.get<ApiRes<PersonalizedMv[]>>({
+    url: '/personalized/mv'
   })
 }

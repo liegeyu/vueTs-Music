@@ -9,7 +9,12 @@
       height="200px"
     >
       <el-carousel-item v-for="item in imgData" :key="item">
-        <img :src="item.pic" :alt="item.typeTitle" class="slide-img" />
+        <img
+          :src="item.pic"
+          :alt="item.typeTitle"
+          class="slide-img"
+          @click="clickSlide(item)"
+        />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -22,11 +27,14 @@ import { Banner } from "@/types/recommend-types";
 import { getBanner } from "@/service/modules/recommend";
 
 let loaded = ref<boolean>(false);
-let imgData = reactive<Banner[]>([]);
+let imgData = ref<Banner[]>([]);
+
+const clickSlide = (item) => {};
 
 onMounted(async () => {
   const res = await getBanner({ type: 1 });
-  imgData = res.banners;
+  imgData.value = res.banners;
+  console.log(imgData.value);
   loaded.value = true;
 });
 </script>

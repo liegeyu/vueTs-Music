@@ -1,6 +1,6 @@
 <template>
   <div class="lead-title">
-    <sapn>{{ title }}</sapn>
+    <span>{{ title }}</span>
     <IconPark
       style="display: flex; align-items: center"
       :icon="Right"
@@ -33,6 +33,7 @@ defineProps({
   font-size: 1.45rem;
   line-height: 1.75rem;
   padding: 1.45rem 0 0.75rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   cursor: pointer;

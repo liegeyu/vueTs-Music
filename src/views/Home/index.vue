@@ -4,6 +4,7 @@
     <SlideShow />
     <Personalized />
     <NewSong />
+    <MV />
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import SlideShow from "@/components/common/SlideShow.vue";
 import Personalized from "./components/Personalized.vue";
 import NewSong from "./components/NewSong.vue";
+import MV from "./components/MV.vue";
 </script>
 
 <style lang="scss" scoped>

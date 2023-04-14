@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container bg-vice">
+  <div class="header-container bg-main">
     <div class="headerBar-left">
       <IconPark
         :icon="Left"

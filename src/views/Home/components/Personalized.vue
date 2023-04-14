@@ -13,7 +13,6 @@
               theme="filled"
               class="play-btn"
               :size="50"
-              @click="onPlay"
             />
           </div>
           <div class="card-count">

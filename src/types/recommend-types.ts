@@ -1,4 +1,5 @@
 // 推荐页面相关 interface
+// /banner
 export interface Banner {
   pic:string
   targetId:number
@@ -6,7 +7,7 @@ export interface Banner {
   typeTitle:string
   bannerId:number
 }
-
+// /personalized
 export interface Personalized {
   id: number;
   type: number;
@@ -20,7 +21,7 @@ export interface Personalized {
   highQuality: boolean;
   alg: string;
 }
-
+// /personalized/newsong
 export interface NewSong {
   id: number;
   type: number;
@@ -187,4 +188,25 @@ export interface SongPrivilegeFreeTrialPrivilege {
 export interface SongPrivilegeChargeInfoList {
   rate: number;
   chargeType: number;
+}
+
+// /personalized/mv
+export interface PersonalizedMv {
+  id: number;
+  type: number;
+  name: string;
+  copywriter: string;
+  picUrl: string;
+  canDislike: boolean;
+  trackNumberUpdateTime?: any;
+  duration: number;
+  playCount: number;
+  subed: boolean;
+  artists: {
+      id: number;
+      name: string;
+  }[];
+  artistName: string;
+  artistId: number;
+  alg: string;
 }

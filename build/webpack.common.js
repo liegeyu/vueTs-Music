@@ -46,6 +46,18 @@ module.exports = {
         use: "vue-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.(jpg|png|jpeg|svg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "images/",
+            },
+          },
+        ],
+        include: /imgs/,
+      },
     ],
   },
   plugins: [

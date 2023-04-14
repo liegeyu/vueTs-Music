@@ -1,0 +1,103 @@
+<template>
+  <div class="detail-container">
+    <img
+      alt="default"
+      class="music-pic"
+      :src="music.al?.picUrl || defalutPic"
+    />
+    <div class="detail-info">
+      <div class="detail-title">
+        <div class="flex">
+          <!-- <div
+            v-if="songUrl.freeTrialInfo?.end > 0"
+            class="bg-red-500 text-xs text-white rounded px-0.5 scale-75"
+          >
+            试听
+          </div> -->
+          <span>{{ music.name || "开源云音乐" }}</span>
+          <span class="title-vic"
+            >- {{ music.ar?.first().name || `hairyCloudMusic` }}</span
+          >
+        </div>
+      </div>
+      <div class="detail-btn-box">
+        <IconPark :icon="Like" size="20" :stroke-width="3" class="detail-btn" />
+        <IconPark
+          :icon="DownTwo"
+          size="20"
+          :stroke-width="3"
+          class="detail-btn"
+        />
+        <IconPark
+          :icon="MoreTwo"
+          size="20"
+          :stroke-width="3"
+          class="detail-btn"
+        />
+        <el-badge :value="1000" :max="999" class="badge">
+          <IconPark
+            :icon="Comment"
+            size="20"
+            :stroke-width="3"
+            class="text-slate-400 hover-text"
+          />
+        </el-badge>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+import { Like, DownTwo, MoreTwo, Comment } from "@icon-park/vue-next";
+import defalutPic from "@/assets/imgs/defaulticon.png";
+
+const store = useStore();
+
+const music = computed(() => store.getters.music);
+console.log(music.value);
+</script>
+
+<style scoped lang="scss">
+.detail-container {
+  display: flex;
+  color: #fff;
+  .music-pic {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+  }
+
+  .detail-info {
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 0.75rem;
+    margin-bottom: 0.5rem;
+
+    .detail-title {
+      width: 24rem;
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-bottom: 0.5rem;
+      .title-vic {
+        color: #929cad;
+      }
+    }
+    .detail-btn-box {
+      display: flex;
+      column-gap: 0.75rem;
+      color: #929cad;
+      .detail-btn {
+        cursor: pointer;
+      }
+      .badge {
+      }
+    }
+  }
+}
+</style>

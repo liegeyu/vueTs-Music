@@ -1,7 +1,8 @@
 // 定义接口 interface
 // vuex 相关
-import { Menus } from '@/types/layout-types'
-import { SearchSuggest } from '@/types/store-types'
+import { Menus } from './layout-types'
+import { SearchSuggest } from './search-types'
+import { Music } from "./player-types"
 
 export interface RootState {}
 
@@ -59,4 +60,9 @@ export interface LayoutState {
 export interface SearchState {
 	searchValue: string;
 	suggestData: SearchSuggest;
+}
+
+export interface PlayerState {
+	music: Music;
+	playerList: Music[];
 }
