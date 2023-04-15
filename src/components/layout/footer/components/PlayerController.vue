@@ -22,7 +22,7 @@
       @click="togglePlay"
     />
     <IconPark :icon="GoEnd" size="28" class="hover-btn" @click="next" />
-    <el-popover placement="top" width="50px">
+    <el-popover popper-class="popper-volume" placement="top" width="50px">
       <template #reference>
         <IconPark
           :icon="VolumeSmall"

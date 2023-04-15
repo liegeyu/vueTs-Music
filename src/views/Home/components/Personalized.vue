@@ -2,7 +2,12 @@
   <div class="personal-container">
     <LeadingTitle title="你的专属歌单" />
     <div class="personal-card">
-      <div class="card-item" v-for="item in cards" :key="item.id">
+      <div
+        class="card-item"
+        v-for="item in cards"
+        :key="item.id"
+        @click="clickCard(item)"
+      >
         <div class="card-cover">
           <div class="card-img">
             <img :src="item.picUrl" :alt="item.name" class="card-img" />
@@ -28,6 +33,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 import { Right, PlayOne, Headset } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
@@ -35,11 +41,22 @@ import LeadingTitle from "@/components/common/LeadingTitle.vue";
 import { getPersonalized } from "@/service/modules/recommend";
 import { Personalized } from "@/types/recommend-types";
 
+const router = useRouter();
 let cardsData = ref<Personalized[]>([]);
 
 const cards = computed(() => {
   return cardsData.value.slice(0, 10);
 });
+
+const clickCard = (card) => {
+  // 路由跳转 playlist
+  router.push({
+    name: "playlist",
+    query: {
+      id: card.id,
+    },
+  });
+};
 
 onMounted(async () => {
   const res = await getPersonalized();

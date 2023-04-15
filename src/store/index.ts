@@ -6,6 +6,7 @@ import user from './modules/user';
 import layout from './modules/layout';
 import search from './modules/search';
 import player from './modules/player';
+import playlist from './modules/playlist';
 
 const store: Store<RootState> = createStore ({
   modules: {
@@ -13,6 +14,7 @@ const store: Store<RootState> = createStore ({
     layout,
     search,
     player,
+    playlist,
   },
   getters
 })

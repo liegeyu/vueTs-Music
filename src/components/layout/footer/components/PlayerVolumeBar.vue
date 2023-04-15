@@ -1,11 +1,11 @@
 <template>
-  <div class="player-volume flex flex-col items-center pt-2">
+  <div class="player-volume">
     <div>
       <el-slider
         vertical
         height="100px"
         :show-tooltip="false"
-        v-model="volumeValue"
+        v-model="volumeBarValue"
         :max="100"
         :min="0"
         size="small"
@@ -13,8 +13,8 @@
         @input="setVolume"
       />
     </div>
-    <div class="text-sm mt-3">{{ volume }}</div>
-    <div class="mt-2">
+    <div class="text-sm">{{ volumeValue }}</div>
+    <div class="text-sm2">
       <IconPark
         :icon="muted ? VolumeMute : VolumeSmall"
         size="16"
@@ -30,7 +30,35 @@
 import { ref } from "vue";
 import { VolumeMute, VolumeSmall } from "@icon-park/vue-next";
 
+let volumeBarValue = ref<number>(0);
 let volumeValue = ref<number>(0);
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.player-volume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  :deep(.el-slider) {
+    --el-slider-main-bg-color: #1eb485;
+    .el-slider__runway {
+      background-color: #474648;
+    }
+    .el-slider__button-wrapper {
+      .el-slider__button {
+        width: 15px;
+        height: 15px;
+        background-color: #1e1e1f;
+      }
+    }
+  }
+  .text-sm {
+    font-size: 0.825rem;
+    margin-top: 0.1rem;
+  }
+  .text-sm2 {
+    margin-top: 0.2rem;
+  }
+}
+</style>

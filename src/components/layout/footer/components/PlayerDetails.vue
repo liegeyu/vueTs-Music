@@ -39,7 +39,7 @@
             :icon="Comment"
             size="20"
             :stroke-width="3"
-            class="text-slate-400 hover-text"
+            class="detail-btn"
           />
         </el-badge>
       </div>
@@ -56,7 +56,7 @@ import defalutPic from "@/assets/imgs/defaulticon.png";
 const store = useStore();
 
 const music = computed(() => store.getters.music);
-console.log(music.value);
+// console.log(music.value);
 </script>
 
 <style scoped lang="scss">
@@ -94,8 +94,17 @@ console.log(music.value);
       color: #929cad;
       .detail-btn {
         cursor: pointer;
+        &:hover {
+          color: #34d399;
+        }
       }
       .badge {
+        :deep(.el-badge__content) {
+          color: #929cad;
+          background-color: rgba(28, 25, 23, 0.9);
+          transform: scale(0.7) translate(45px, -5px);
+          border: none;
+        }
       }
     }
   }

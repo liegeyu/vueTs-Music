@@ -45,6 +45,11 @@ const routes: RouteRecordRaw[] = [
           keepAlive: true,
         }
       },
+      {
+        path: '/playlist',
+        name: 'playlist',
+        component: () => import('@/views/PlayList/index.vue'),
+      },
     ]
   }
 ]

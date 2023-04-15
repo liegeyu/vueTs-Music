@@ -66,3 +66,7 @@ export interface PlayerState {
 	music: Music;
 	playerList: Music[];
 }
+
+export interface PlaylistStore {
+	
+}

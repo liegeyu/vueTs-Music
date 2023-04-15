@@ -59,14 +59,14 @@ import Drawer from "./drawer/index.vue";
       .main-content {
         width: 100%;
         min-width: 1100px;
-        max-width: 1536px;
+        // max-width: 1536px;
         margin-left: auto;
         margin-right: auto;
       }
     }
 
     .app-footer {
-      height: 6rem;
+      height: 5.5rem;
     }
   }
 }

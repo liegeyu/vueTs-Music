@@ -24,18 +24,17 @@ let currentTime = ref<number>(0);
     }
 
     .el-slider__button-wrapper {
-      width: 10px;
-      height: 10px;
-      top: -7.5px;
+      width: 32px;
+      height: 32px;
+      // top: -7.5px;
+      .el-slider__button {
+        width: 10px;
+        height: 10px;
+      }
     }
 
     .el-slider__bar {
       // background-color: #1eb485;
-    }
-
-    .el-slider__button {
-      width: 8px !important;
-      height: 8px;
     }
   }
 }
