@@ -88,7 +88,7 @@ defineProps({
       }
       .title-main {
         display: inline-block;
-        padding-left: 1rem;
+        padding-left: 0.7rem;
       }
     }
     .creator-info {

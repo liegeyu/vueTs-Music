@@ -1,4 +1,5 @@
 // 歌单相关 interface
+// /playlist/detail
 export interface PlayListDetail {
   id: number;
   name: string;
@@ -207,4 +208,88 @@ export interface PlayListDetailTrackIds {
   uid: number;
   rcmdReason: string;
   sc?: any;
+}
+
+// /playlist/track/all
+export interface SongList {
+  name: string;
+  id: number;
+  pst: number;
+  t: number;
+  ar: SongListAr[];
+  alia: string[];
+  pop: number;
+  st: number;
+  rt?: any;
+  fee: number;
+  v: number;
+  crbt?: any;
+  cf: string;
+  al: SongListAl;
+  dt: number;
+  h: SongListH;
+  m: SongListM;
+  l: SongListL;
+  a?: any;
+  cd: string;
+  no: number;
+  rtUrl?: any;
+  ftype: number;
+  rtUrls: any[];
+  djId: number;
+  copyright: number;
+  s_id: number;
+  mark: number;
+  originCoverType: number;
+  originSongSimpleData?: any;
+  tagPicList?: any;
+  resourceState: boolean;
+  version: number;
+  songJumpInfo?: any;
+  entertainmentTags?: any;
+  single: number;
+  noCopyrightRcmd?: any;
+  rtype: number;
+  rurl?: any;
+  mst: number;
+  cp: number;
+  mv: number;
+  publishTime: number;
+}
+
+export interface SongListAr {
+  id: number;
+  name: string;
+  tns: any[];
+  alias: any[];
+}
+
+export interface SongListAl {
+  id: number;
+  name: string;
+  picUrl: string;
+  tns: any[];
+  pic_str: string;
+  pic: number;
+}
+
+export interface SongListH {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface SongListM {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface SongListL {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
 }

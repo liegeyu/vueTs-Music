@@ -9,12 +9,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Comment: typeof import('./src/components/common/Comment.vue')['default']
+    CommentItem: typeof import('./src/components/common/CommentItem.vue')['default']
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
-    ElBadge: typeof import('element-plus/es')['ElBadge']
-    ElPopover: typeof import('element-plus/es')['ElPopover']
-    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElSlider: typeof import('element-plus/es')['ElSlider']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']

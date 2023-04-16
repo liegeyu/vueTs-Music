@@ -4,6 +4,7 @@ export interface ApiRes<T> {
   data?: T;
   result?: T;
   playlist?: T;
+  songs?: T;
   banners?: T;
   message?: string;
 }

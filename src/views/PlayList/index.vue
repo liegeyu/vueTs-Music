@@ -3,8 +3,12 @@
     <PlaylistInfo :playlist="playlist" v-if="loaded" />
     <div class="playlist-main">
       <el-tabs v-model="tabValue">
-        <el-tab-pane lazy label="歌曲列表" name="songlist"> </el-tab-pane>
-        <el-tab-pane lazy label="评论" name="comments" />
+        <el-tab-pane lazy label="歌曲列表" name="songlist">
+          <SonglistData :songlist="songlist" />
+        </el-tab-pane>
+        <el-tab-pane lazy :label="`评论(${commentCount})`" name="comments">
+          <Comment :playlistId="playlistId" />
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -14,21 +18,32 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
-import PlaylistInfo from "@/views/PlayList/components/PlaylistInfo.vue";
-import { getPlayListDetail } from "@/service/modules/playlist";
-import { PlayListDetail } from "@/types/playlist-types";
+import PlaylistInfo from "./components/PlaylistInfo.vue";
+import SonglistData from "./components/SonglistData.vue";
+import Comment from "@/components/common/Comment.vue";
+import {
+  getPlayListDetail,
+  getPlaylistTrackAll,
+} from "@/service/modules/playlist";
+import { PlayListDetail, SongList } from "@/types/playlist-types";
 
 const route = useRoute();
 let loaded = ref<boolean>(false);
 const playlistId = ref<string | string[]>(route.query.id);
-let playlist = reactive<PlayListDetail>({} as PlayListDetail);
 let tabValue = ref<string>("songlist");
+let playlist = reactive<PlayListDetail>({} as PlayListDetail);
+let commentCount = ref<number>(0);
+let songlist = ref<SongList[]>([]);
 
 onMounted(async () => {
-  const res = await getPlayListDetail({ id: playlistId.value });
-  playlist = res.playlist;
+  const detailRes = await getPlayListDetail({ id: playlistId.value });
+  playlist = detailRes.playlist;
+  commentCount.value = playlist.commentCount;
+  const listRes = await getPlaylistTrackAll({ id: playlistId.value });
+  songlist.value = listRes.songs;
   loaded.value = true;
   console.log(playlist);
+  console.log(songlist.value);
 });
 </script>
 
@@ -38,6 +53,10 @@ onMounted(async () => {
 
   .playlist-main {
     padding-left: 2rem;
+    :deep(.el-tabs__header) {
+      margin-bottom: 10px;
+    }
+
     :deep(.el-tabs__item) {
       color: #d5d5d5;
     }

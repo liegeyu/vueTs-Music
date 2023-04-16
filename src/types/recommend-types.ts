@@ -101,17 +101,47 @@ export interface SongAlbum {
   tags: string;
   company: string;
   briefDesc: string;
-  artist: PNSSongAlbumArtist;
+  artist: SongAlbumArtist;
   songs: any[];
   alias: any[];
   status: number;
   copyrightId: number;
   commentThreadId: string;
-  artists: PNSSongAlbumArtists[];
+  artists: SongAlbumArtists[];
   subType: string;
   onSale: boolean;
   mark: number;
   picId_str: string;
+}
+
+export interface SongAlbumArtist {
+  name: string;
+  id: number;
+  picId: number;
+  img1v1Id: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  albumSize: number;
+  alias: any[];
+  trans: string;
+  musicSize: number;
+  topicPerson: number;
+}
+
+export interface SongAlbumArtists {
+  name: string;
+  id: number;
+  picId: number;
+  img1v1Id: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  albumSize: number;
+  alias: any[];
+  trans: string;
+  musicSize: number;
+  topicPerson: number;
 }
 
 export interface SongBMusic {
