@@ -6,12 +6,14 @@
         :size="iconSize"
         :stroke-width="2"
         class="icon-button"
+        @click="$router.back()"
       />
       <IconPark
         :icon="Right"
         :size="iconSize"
         :stroke-width="2"
         class="icon-button"
+        @click="$router.forward()"
       />
       <div class="search-bar">
         <SearchPopo />
@@ -43,6 +45,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+// import { useRouter } from "vue-router";
 
 import IconPark from "@/components/common/IconPark.vue";
 import SearchPopo from "./components/SearchPopo.vue";
@@ -55,6 +58,7 @@ import {
   HamburgerButton,
 } from "@icon-park/vue-next";
 
+// const router = useRouter();
 const iconSize = 22;
 </script>
 

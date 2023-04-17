@@ -1,7 +1,7 @@
 <template>
-  <div class="playlist-container">
-    <PlaylistInfo :playlist="playlist" v-if="loaded" />
-    <div class="playlist-main">
+  <div class="playlist-container" v-if="loaded">
+    <PlaylistInfo :playlist="playlist" />
+    <div class="playlist-main" v-myLoading="loading.visible">
       <el-tabs v-model="tabValue">
         <el-tab-pane lazy label="歌曲列表" name="songlist">
           <SonglistData :songlist="songlist" />
@@ -26,6 +26,8 @@ import {
   getPlaylistTrackAll,
 } from "@/service/modules/playlist";
 import { PlayListDetail, SongList } from "@/types/playlist-types";
+import { useLoading } from "@/hooks/useLoading";
+const { loading, showLoading, hideLoading } = useLoading();
 
 const route = useRoute();
 let loaded = ref<boolean>(false);
@@ -38,10 +40,12 @@ let songlist = ref<SongList[]>([]);
 onMounted(async () => {
   const detailRes = await getPlayListDetail({ id: playlistId.value });
   playlist = detailRes.playlist;
+  loaded.value = true;
+  showLoading();
   commentCount.value = playlist.commentCount;
   const listRes = await getPlaylistTrackAll({ id: playlistId.value });
   songlist.value = listRes.songs;
-  loaded.value = true;
+  hideLoading();
   console.log(playlist);
   console.log(songlist.value);
 });

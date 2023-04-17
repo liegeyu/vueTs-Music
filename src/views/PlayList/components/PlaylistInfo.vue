@@ -44,7 +44,7 @@
       </div>
       <div class="playlist-description">
         <span class="des-header">简介：</span>
-        <div class="des-main">{{ playlist.description }}</div>
+        <MoreText :text="playlist.description" :limit="90" />
       </div>
     </div>
   </div>
@@ -53,6 +53,7 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import IconPark from "@/components/common/IconPark.vue";
+import MoreText from "@/components/common/MoreText.vue";
 import { PlayListDetail } from "@/types/playlist-types";
 import { Play, Add } from "@icon-park/vue-next";
 
@@ -137,18 +138,12 @@ defineProps({
       }
     }
     .playlist-description {
-      // display: flex;
+      display: flex;
       color: #d5d5d5;
 
       .des-header {
         font-size: 1.1rem;
-        // flex: 1;
-      }
-      .des-main {
-        color: #8b8b85;
-        display: inline;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        min-width: 3.5rem;
       }
     }
   }

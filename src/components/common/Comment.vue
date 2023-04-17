@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-container">
+  <div class="comment-container" v-myLoading="loading.visible">
     <div class="comment-text">
       <el-input
         v-model="textValue"
@@ -60,7 +60,9 @@ import IconPark from "@/components/common/IconPark.vue";
 import { Pound, AtSign, EmotionHappy } from "@icon-park/vue-next";
 import { getCommentPlaylist } from "@/service/modules/comment";
 import { Comments, HotComment } from "@/types/comment-types";
+import { useLoading } from "@/hooks/useLoading";
 
+const { loading, showLoading, hideLoading } = useLoading();
 const props = defineProps({
   playlistId: {
     type: Number,
@@ -73,9 +75,11 @@ let comments = ref<Comments[]>([]);
 let hotComments = ref<HotComment[]>([]);
 
 onMounted(async () => {
+  showLoading();
   const res = await getCommentPlaylist({ id: props.playlistId });
   hotComments.value = res.hotComments;
   comments.value = res.comments;
+  hideLoading();
   console.log(hotComments.value);
 });
 </script>

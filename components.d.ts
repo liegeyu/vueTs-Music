@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']
@@ -22,6 +23,7 @@ declare module '@vue/runtime-core' {
     Layout: typeof import('./src/components/layout/index.vue')['default']
     LeadingTitle: typeof import('./src/components/common/LeadingTitle.vue')['default']
     Menu: typeof import('./src/components/layout/menu/index.vue')['default']
+    MoreText: typeof import('./src/components/common/MoreText.vue')['default']
     PlayerActions: typeof import('./src/components/layout/footer/components/PlayerActions.vue')['default']
     PlayerBar: typeof import('./src/components/layout/footer/components/PlayerBar.vue')['default']
     PlayerController: typeof import('./src/components/layout/footer/components/PlayerController.vue')['default']
@@ -33,5 +35,8 @@ declare module '@vue/runtime-core' {
     SearchSuggest: typeof import('./src/components/layout/header/components/SearchSuggest.vue')['default']
     SlideShow: typeof import('./src/components/common/SlideShow.vue')['default']
     UserLogin: typeof import('./src/components/layout/header/components/UserLogin.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

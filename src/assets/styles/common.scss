@@ -3,3 +3,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  .loading-text {
+    color: #8d8d8d;
+  }
+}

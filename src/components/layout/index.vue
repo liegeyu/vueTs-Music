@@ -10,7 +10,10 @@
       <div class="app-content bg-vice">
         <el-scrollbar>
           <div class="main-content">
-            <router-view></router-view>
+            <keep-alive v-if="$route.meta.keepAlive">
+              <router-view></router-view>
+            </keep-alive>
+            <router-view v-else></router-view>
           </div>
         </el-scrollbar>
       </div>
