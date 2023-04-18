@@ -1,5 +1,5 @@
 <template>
-  <div class="song-item">
+  <div class="song-item" @dblclick="playSong(song)">
     <div class="b-actions">
       <span>{{ index >= 9 ? index + 1 : `0${index + 1}` }}</span>
       <IconPark :icon="Like" :size="18" :stroke-width="2" class="action-btn" />
@@ -33,10 +33,11 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import { useStore } from "vuex";
 
 import IconPark from "@/components/common/IconPark.vue";
 import { Like, Download } from "@icon-park/vue-next";
-defineProps({
+const props = defineProps({
   song: {
     type: Object,
     default: () => {},
@@ -46,6 +47,18 @@ defineProps({
     default: 0,
   },
 });
+
+const store = useStore();
+const playSong = (song) => {
+  store.dispatch("player/playMusic", { id: props.song.id });
+  // 将歌单歌曲存入 playerList
+  const songListId = store.getters.songListId;
+  const playerListId = store.getters.playerListId;
+  if (songListId !== playerListId) {
+    store.commit("player/setPlayerListId", songListId);
+    store.commit("player/setPlayerList", store.getters.songlist);
+  }
+};
 </script>
 
 <style scoped lang="scss">

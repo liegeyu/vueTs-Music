@@ -25,13 +25,10 @@ import PlayerActions from "./components/PlayerActions.vue";
 <style scoped lang="scss">
 .footer-container {
   height: 100%;
-
   .player-main {
-    height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 1.25rem;
-    flex-grow: 1;
+    padding: 0.5rem 1.25rem 0;
     .player-details,
     .palyer-controller,
     .palyer-actions {

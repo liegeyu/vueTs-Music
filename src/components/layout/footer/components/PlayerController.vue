@@ -1,27 +1,21 @@
 <template>
   <div class="controller-container">
     <IconPark
-      :icon="loopType === 0 ? PlayOnce : loopType === 1 ? LoopOnce : ShuffleOne"
+      :icon="loopType === 0 ? LoopOnce : loopType === 1 ? ShuffleOne : PlayOnce"
       size="20"
       :stroke-width="3"
       class="hover-btn"
-      @click="toggleLoop"
+      @click="toggleLoopType"
     />
-    <IconPark
-      :icon="GoStart"
-      size="28"
-      theme="filled"
-      class="hover-btn"
-      @click="prev"
-    />
+    <IconPark :icon="GoStart" size="28" class="hover-btn" @click="prevSong" />
     <IconPark
       :icon="isPause ? PauseOne : Play"
       size="45"
       theme="filled"
       class="play-btn"
-      @click="togglePlay"
+      @click="togglePaused"
     />
-    <IconPark :icon="GoEnd" size="28" class="hover-btn" @click="next" />
+    <IconPark :icon="GoEnd" size="28" class="hover-btn" @click="nextSong" />
     <el-popover popper-class="popper-volume" placement="top" width="50px">
       <template #reference>
         <IconPark
@@ -37,6 +31,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, toRefs } from "vue";
+import { useStore } from "vuex";
+
+import PlayerVolumeBar from "./PlayerVolumeBar.vue";
+import IconPark from "@/components/common/IconPark.vue";
 import {
   Play,
   PauseOne,
@@ -47,7 +46,22 @@ import {
   GoStart,
   VolumeSmall,
 } from "@icon-park/vue-next";
-import PlayerVolumeBar from "./PlayerVolumeBar.vue";
+
+const store = useStore();
+const { isPause, loopType } = toRefs(store.getters);
+
+const toggleLoopType = () => {
+  store.dispatch("player/toggleLoopType");
+};
+const togglePaused = () => {
+  store.dispatch("player/togglePauseMusic");
+};
+const prevSong = () => {
+  store.dispatch("player/prevSong");
+};
+const nextSong = () => {
+  store.dispatch("player/nextSong");
+};
 </script>
 
 <style scoped lang="scss">

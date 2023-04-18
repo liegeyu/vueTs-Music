@@ -1,11 +1,9 @@
-// 播放相关 interface
-// Music
-export interface Music {
+export interface Song {
   name: string;
   id: number;
   pst: number;
   t: number;
-  ar: MusicAr[];
+  ar: SongAr[];
   alia: string[];
   pop: number;
   st: number;
@@ -14,11 +12,11 @@ export interface Music {
   v: number;
   crbt?: any;
   cf: string;
-  al: MusicAl;
+  al: SongAl;
   dt: number;
-  h: MusicH;
-  m: MusicM;
-  l: MusicL;
+  h: SongH;
+  m: SongM;
+  l: SongL;
   a?: any;
   cd: string;
   no: number;
@@ -46,14 +44,14 @@ export interface Music {
   publishTime: number;
 }
 
-export interface MusicAr {
+export interface SongAr {
   id: number;
   name: string;
   tns: any[];
   alias: any[];
 }
 
-export interface MusicAl {
+export interface SongAl {
   id: number;
   name: string;
   picUrl: string;
@@ -62,23 +60,59 @@ export interface MusicAl {
   pic: number;
 }
 
-export interface MusicH {
+export interface SongH {
   br: number;
   fid: number;
   size: number;
   vd: number;
 }
 
-export interface MusicM {
+export interface SongM {
   br: number;
   fid: number;
   size: number;
   vd: number;
 }
 
-export interface MusicL {
+export interface SongL {
   br: number;
   fid: number;
   size: number;
   vd: number;
+}
+
+// /song/url
+export interface SongUrl {
+  id: number;
+  url: string;
+  br: number;
+  size: number;
+  md5: string;
+  code: number;
+  expi: number;
+  type: string;
+  gain: number;
+  fee: number;
+  payed: number;
+  flag: number;
+  canExtend: boolean;
+  freeTrialPrivilege: SongUrlFreeTrialPrivilege;
+  freeTimeTrialPrivilege: SongUrlFreeTimeTrialPrivilege;
+  urlSource: number;
+  freeTrialInfo:{
+      start:number
+      end:number
+  }
+}
+
+export interface SongUrlFreeTrialPrivilege {
+  resConsumable: boolean;
+  userConsumable: boolean;
+}
+
+export interface SongUrlFreeTimeTrialPrivilege {
+  resConsumable: boolean;
+  userConsumable: boolean;
+  type: number;
+  remainTime: number;
 }

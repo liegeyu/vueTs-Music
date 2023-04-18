@@ -5,20 +5,13 @@
       class="music-pic"
       :src="music.al?.picUrl || defalutPic"
     />
+
     <div class="detail-info">
       <div class="detail-title">
-        <div class="flex">
-          <!-- <div
-            v-if="songUrl.freeTrialInfo?.end > 0"
-            class="bg-red-500 text-xs text-white rounded px-0.5 scale-75"
-          >
-            试听
-          </div> -->
-          <span>{{ music.name || "开源云音乐" }}</span>
-          <span class="title-vic"
-            >- {{ music.ar?.first().name || `hairyCloudMusic` }}</span
-          >
-        </div>
+        <span>{{ music?.name ? music.name : "开源云音乐" }}</span>
+        <span class="title-vic"
+          >- {{ music?.ar ? music?.ar[0].name : `hairyCloudMusic` }}</span
+        >
       </div>
       <div class="detail-btn-box">
         <IconPark :icon="Like" size="20" :stroke-width="3" class="detail-btn" />
@@ -56,7 +49,7 @@ import defalutPic from "@/assets/imgs/defaulticon.png";
 const store = useStore();
 
 const music = computed(() => store.getters.music);
-// console.log(music.value);
+console.log(music);
 </script>
 
 <style scoped lang="scss">
@@ -78,7 +71,7 @@ const music = computed(() => store.getters.music);
     margin-bottom: 0.5rem;
 
     .detail-title {
-      width: 24rem;
+      // width: 100%;
       cursor: pointer;
       overflow: hidden;
       text-overflow: ellipsis;

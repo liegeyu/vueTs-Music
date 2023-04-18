@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 import PlaylistInfo from "./components/PlaylistInfo.vue";
 import SonglistData from "./components/SonglistData.vue";
@@ -30,6 +31,7 @@ import { useLoading } from "@/hooks/useLoading";
 const { loading, showLoading, hideLoading } = useLoading();
 
 const route = useRoute();
+const store = useStore();
 let loaded = ref<boolean>(false);
 const playlistId = ref<string | string[]>(route.query.id);
 let tabValue = ref<string>("songlist");
@@ -40,14 +42,15 @@ let songlist = ref<SongList[]>([]);
 onMounted(async () => {
   const detailRes = await getPlayListDetail({ id: playlistId.value });
   playlist = detailRes.playlist;
+  commentCount.value = playlist.commentCount;
+  store.commit("playlist/setSongListId", playlist.id);
   loaded.value = true;
   showLoading();
-  commentCount.value = playlist.commentCount;
+
   const listRes = await getPlaylistTrackAll({ id: playlistId.value });
   songlist.value = listRes.songs;
   hideLoading();
-  console.log(playlist);
-  console.log(songlist.value);
+  store.commit("playlist/setSongList", songlist.value);
 });
 </script>
 
@@ -56,6 +59,7 @@ onMounted(async () => {
   width: 100%;
 
   .playlist-main {
+    overflow: hidden;
     padding-left: 2rem;
     :deep(.el-tabs__header) {
       margin-bottom: 10px;

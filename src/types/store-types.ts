@@ -2,7 +2,7 @@
 // vuex 相关
 import { Menus } from './layout-types'
 import { SearchSuggest } from './search-types'
-import { Music } from "./player-types"
+import { Song, SongUrl } from "./player-types"
 
 export interface RootState {}
 
@@ -63,10 +63,22 @@ export interface SearchState {
 }
 
 export interface PlayerState {
-	music: Music;
-	playerList: Music[];
+	audio: HTMLAudioElement;
+	music: Song;
+	musicUrl: SongUrl;
+	playerList: Song[];
+	playerListId: number;
+	musicId: number;
+	volume: number;
+	currentTime: number;
+	duration: number;
+	isMuted: boolean;
+	isPause: boolean;
+	isEnded: boolean;
+	loopType: number;
 }
 
 export interface PlaylistStore {
-	
+	songListId: number;
+	songlist: Song[];
 }

@@ -37,14 +37,12 @@ let playListCount = ref<number>(1);
   align-items: center;
   justify-content: flex-end;
   column-gap: 0.75rem;
-
   .playerlist-btn {
     display: flex;
     align-items: center;
     .text-time {
       display: inline;
       font-size: 1.2rem;
-      text-align: center;
     }
   }
 

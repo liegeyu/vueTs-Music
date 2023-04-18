@@ -43,6 +43,7 @@ import Drawer from "./drawer/index.vue";
 
   .app-aside {
     width: 16rem;
+    min-width: 170px;
     height: 100vh;
   }
 
@@ -50,7 +51,6 @@ import Drawer from "./drawer/index.vue";
     display: flex;
     flex-direction: column;
     flex: 1;
-
     .app-header {
       height: 4.5rem;
     }
@@ -69,7 +69,7 @@ import Drawer from "./drawer/index.vue";
     }
 
     .app-footer {
-      height: 5.5rem;
+      height: 6rem;
     }
   }
 }
