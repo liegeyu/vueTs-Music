@@ -69,6 +69,7 @@ export interface PlayerState {
 	playerList: Song[];
 	playerListId: number;
 	musicId: number;
+	beforeVolume: number;
 	volume: number;
 	currentTime: number;
 	duration: number;
@@ -76,6 +77,7 @@ export interface PlayerState {
 	isPause: boolean;
 	isEnded: boolean;
 	loopType: number;
+	randomSongIndexArr: number[];
 }
 
 export interface PlaylistStore {

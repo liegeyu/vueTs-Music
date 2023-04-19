@@ -19,10 +19,11 @@
     <el-popover popper-class="popper-volume" placement="top" width="50px">
       <template #reference>
         <IconPark
-          :icon="VolumeSmall"
-          size="20"
+          :icon="isMuted ? VolumeMute : VolumeSmall"
+          :size="20"
           :stroke-width="3"
           class="hover-btn"
+          @click="toggleMuted"
         />
       </template>
       <PlayerVolumeBar />
@@ -45,10 +46,11 @@ import {
   GoEnd,
   GoStart,
   VolumeSmall,
+  VolumeMute,
 } from "@icon-park/vue-next";
 
 const store = useStore();
-const { isPause, loopType } = toRefs(store.getters);
+const { isPause, isMuted, loopType } = toRefs(store.getters);
 
 const toggleLoopType = () => {
   store.dispatch("player/toggleLoopType");
@@ -61,6 +63,9 @@ const prevSong = () => {
 };
 const nextSong = () => {
   store.dispatch("player/nextSong");
+};
+const toggleMuted = () => {
+  store.commit("player/toggleMuted");
 };
 </script>
 

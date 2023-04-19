@@ -1,6 +1,8 @@
 <template>
   <div class="actions-container">
-    <span class="text-time"> {{ currentTime }} / {{ duration }} </span>
+    <span class="text-time">
+      {{ formatDuration(currentTime) }} / {{ formatDuration(duration) }}
+    </span>
     <IconPark
       :icon="TextMessage"
       size="20"
@@ -16,18 +18,21 @@
         class="btn-hover"
         title="播放列表"
       />
-      <span class="text-time">{{ playListCount }}</span>
+      <span class="text-time">{{ playerListLen }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { MusicList, TextMessage } from "@icon-park/vue-next";
+import { ref, toRefs } from "vue";
+import { useStore } from "vuex";
 
-let currentTime = ref<string>("00:00");
-let duration = ref<string>("00:00");
-let playListCount = ref<number>(1);
+import IconPark from "@/components/common/IconPark.vue";
+import { MusicList, TextMessage } from "@icon-park/vue-next";
+import { formatDuration } from "@/utils/formatNumber";
+
+const store = useStore();
+const { currentTime, duration, playerListLen } = toRefs(store.getters);
 </script>
 
 <style scoped lang="scss">

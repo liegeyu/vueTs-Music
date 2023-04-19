@@ -5,7 +5,7 @@
       <div class="h-title">标题</div>
       <div class="h-singer">歌手</div>
       <div class="h-album">专辑</div>
-      <div class="h-duration">时长</div>
+      <div class="h-duration">时间</div>
     </div>
     <div class="songlist-body">
       <template v-for="(item, index) in songlist" :key="item.id">

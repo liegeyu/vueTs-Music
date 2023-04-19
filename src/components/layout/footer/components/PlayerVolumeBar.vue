@@ -5,33 +5,37 @@
         vertical
         height="100px"
         :show-tooltip="false"
-        v-model="volumeBarValue"
+        v-model="volumeValue"
         :max="100"
         :min="0"
         size="small"
-        :disabled="muted"
-        @input="setVolume"
+        @input="volumeInput"
       />
     </div>
     <div class="text-sm">{{ volumeValue }}</div>
-    <div class="text-sm2">
-      <IconPark
-        :icon="muted ? VolumeMute : VolumeSmall"
-        size="16"
-        theme="filled"
-        class="hover-text"
-        @click="toggleMuted"
-      />
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { VolumeMute, VolumeSmall } from "@icon-park/vue-next";
+import { toRefs, computed } from "vue";
+import { useStore } from "vuex";
 
-let volumeBarValue = ref<number>(0);
-let volumeValue = ref<number>(0);
+const store = useStore();
+const { volume } = toRefs(store.getters);
+
+let volumeValue = computed({
+  get: () => {
+    return volume.value;
+  },
+  set: (val) => {
+    // 修改音量
+    store.commit("player/modifyMusicVolume", val);
+  },
+});
+
+const volumeInput = (val) => {
+  store.commit("player/modifyMusicVolume", val);
+};
 </script>
 
 <style scoped lang="scss">

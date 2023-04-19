@@ -13,7 +13,9 @@
       <div class="creator-info">
         <el-avatar :src="playlist.creator.avatarUrl" :size="27"></el-avatar>
         <span class="creator-name">{{ playlist.creator.nickname }}</span>
-        <span class="create-time">{{ playlist.createTime }}</span>
+        <span class="create-time"
+          >{{ formatTimeStamp(playlist.createTime) }}创建</span
+        >
       </div>
       <div class="playlist-actions">
         <div class="play-allbtn">
@@ -56,6 +58,7 @@ import IconPark from "@/components/common/IconPark.vue";
 import MoreText from "@/components/common/MoreText.vue";
 import { PlayListDetail } from "@/types/playlist-types";
 import { Play, Add } from "@icon-park/vue-next";
+import { formatTimeStamp } from "@/utils/formatNumber";
 
 defineProps({
   playlist: {

@@ -8,7 +8,9 @@
 
     <div class="detail-info">
       <div class="detail-title">
-        <span>{{ music?.name ? music.name : "开源云音乐" }}</span>
+        <span class="title-main">{{
+          music?.name ? music.name : "开源云音乐"
+        }}</span>
         <span class="title-vic"
           >- {{ music?.ar ? music?.ar[0].name : `hairyCloudMusic` }}</span
         >
@@ -77,6 +79,14 @@ console.log(music);
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-bottom: 0.5rem;
+      .title-main {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 27rem;
+        display: inline-block;
+      }
+
       .title-vic {
         color: #929cad;
       }

@@ -1,7 +1,9 @@
 <template>
   <div class="player-bar">
     <el-slider
-      v-model="currentTime"
+      :min="0"
+      :max="duration"
+      v-model="nowTime"
       :show-tooltip="false"
       @change="changeTime"
     />
@@ -9,8 +11,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-let currentTime = ref<number>(0);
+import { toRefs, computed, watch } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const { duration, currentTime } = toRefs(store.getters);
+
+let nowTime = computed({
+  get: () => {
+    return currentTime.value;
+  },
+  set: (val) => {
+    store.dispatch("player/modifySongTime", val);
+  },
+});
+
+const changeTime = (val) => {
+  store.dispatch("player/modifySongTime", val);
+};
 </script>
 
 <style scoped lang="scss">

@@ -26,7 +26,7 @@
       <span>{{ song.al.name }}</span>
     </div>
     <div class="b-duration">
-      <span>{{ song.dt }}</span>
+      <span>{{ formatDuration(song.dt / 1000) }}</span>
     </div>
   </div>
 </template>
@@ -37,6 +37,8 @@ import { useStore } from "vuex";
 
 import IconPark from "@/components/common/IconPark.vue";
 import { Like, Download } from "@icon-park/vue-next";
+import { formatDuration } from "@/utils/formatNumber";
+
 const props = defineProps({
   song: {
     type: Object,
@@ -57,6 +59,7 @@ const playSong = (song) => {
   if (songListId !== playerListId) {
     store.commit("player/setPlayerListId", songListId);
     store.commit("player/setPlayerList", store.getters.songlist);
+    store.dispatch("player/initRandomSongIndexArr");
   }
 };
 </script>
