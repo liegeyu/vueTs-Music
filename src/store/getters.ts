@@ -17,4 +17,5 @@ export default {
   isPause: (state) => { return state.player.isPause },
   isMuted: (state) => { return state.player.isMuted },
   loopType: (state) => { return state.player.loopType },
+  showPlayerList: (state) => { return state.player.showPlayerList },
 }

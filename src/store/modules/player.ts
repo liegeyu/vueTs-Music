@@ -27,6 +27,7 @@ const playerStore: Module<PlayerState, RootState> = {
     isEnded: false, // 是否播放结束
     loopType: 0,  // 循环设置 0: 列表循环 1: 随机循环 2: 单曲循环
     randomSongIndexArr: [] as number[], // 随机播放索引
+    showPlayerList: false,  // 显示歌曲列表
   },
   mutations: {
     setAudioSrc(state, value: string) {
@@ -57,6 +58,9 @@ const playerStore: Module<PlayerState, RootState> = {
     setMusicTime(state, payload) {
       state.currentTime = payload.curTime;
       state.duration = payload.duration;
+    },
+    toggleShowPlayerList(state) {
+      state.showPlayerList = !state.showPlayerList;
     },
     // 切换静音
     toggleMuted(state) {

@@ -51,7 +51,6 @@ import defalutPic from "@/assets/imgs/defaulticon.png";
 const store = useStore();
 
 const music = computed(() => store.getters.music);
-console.log(music);
 </script>
 
 <style scoped lang="scss">

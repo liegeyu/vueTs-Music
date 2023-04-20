@@ -3,7 +3,7 @@
     <LeadingTitle title="推荐新音乐" />
     <div class="newsong-card">
       <div class="card-item" v-for="item in newSongData" :key="item.id">
-        <div class="card-cover">
+        <div class="card-cover" @click="playSong(item)">
           <div class="card-img">
             <img :src="item.picUrl" :alt="item.name" class="card-img" />
           </div>
@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <div class="card-description">
+        <div class="card-description" @dblclick="playSong(item)">
           <div class="des-title">{{ item.name }}</div>
           <div class="des-vice">{{ item.song.artists[0]?.name }}</div>
         </div>
@@ -24,16 +24,50 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
 
+import { getSongDetail } from "@/service/modules/player";
 import LeadingTitle from "@/components/common/LeadingTitle.vue";
 import { getNewSong } from "@/service/modules/recommend";
 import { NewSong } from "@/types/recommend-types";
+import { Song } from "@/types/player-types";
 
+const store = useStore();
 let newSongData = ref<NewSong[]>([]);
+let newSongList = ref([]);
+
+const playSong = (songItem) => {
+  // 播放
+  console.log(songItem);
+  const song = songItem.song;
+  store.dispatch("player/playMusic", { id: song.id });
+  // 存入songlist
+  store.commit("playlist/setSongListId", "843949843");
+  store.commit("playlist/setSongList", newSongList.value);
+  // 将音乐存入 playlist
+  const songListId = store.getters.songListId;
+  const playerListId = store.getters.playerListId;
+  if (songListId !== playerListId) {
+    store.commit("player/setPlayerListId", songListId);
+    store.commit("player/setPlayerList", store.getters.songlist);
+    store.dispatch("player/initRandomSongIndexArr");
+  }
+};
+
+// 构造新音乐的 songlist
+const initNewSongList = async (songDataAll) => {
+  let songIdArr = [];
+  songDataAll.forEach((newSong) => {
+    songIdArr.push(newSong.song.id);
+  });
+  const res = await getSongDetail({ ids: songIdArr.join(",") });
+  return res.songs;
+};
+
 onMounted(async () => {
   const res = await getNewSong({ limit: 12 });
   newSongData.value = res.result;
-  console.log(newSongData.value);
+  newSongList.value = await initNewSongList(res.result);
 });
 </script>
 

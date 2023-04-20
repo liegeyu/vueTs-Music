@@ -16,20 +16,26 @@
             <router-view v-else></router-view>
           </div>
         </el-scrollbar>
+        <Drawer v-if="showPlayerList" />
       </div>
       <div class="app-footer">
         <Footer />
       </div>
     </div>
-    <Drawer />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted, ref } from "vue";
 import Header from "./header/index.vue";
 import Menu from "./menu/index.vue";
 import Footer from "./footer/index.vue";
 import Drawer from "./drawer/index.vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+
+const showPlayerList = computed(() => store.getters.showPlayerList);
 </script>
 
 <style lang="scss" scoped>
@@ -53,6 +59,7 @@ import Drawer from "./drawer/index.vue";
     flex: 1;
     .app-header {
       height: 4.5rem;
+      z-index: 1000;
     }
 
     .app-content {
@@ -70,6 +77,7 @@ import Drawer from "./drawer/index.vue";
 
     .app-footer {
       height: 6rem;
+      z-index: 1000;
     }
   }
 }

@@ -10,7 +10,7 @@
       class="btn-hover"
       title="歌词"
     />
-    <div class="playerlist-btn" @click="showPlayList = true">
+    <div class="playerlist-btn" @click="showDrawer">
       <IconPark
         :icon="MusicList"
         size="20"
@@ -33,6 +33,10 @@ import { formatDuration } from "@/utils/formatNumber";
 
 const store = useStore();
 const { currentTime, duration, playerListLen } = toRefs(store.getters);
+
+const showDrawer = () => {
+  store.commit("player/toggleShowPlayerList");
+};
 </script>
 
 <style scoped lang="scss">

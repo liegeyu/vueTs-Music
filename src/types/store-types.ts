@@ -78,6 +78,7 @@ export interface PlayerState {
 	isEnded: boolean;
 	loopType: number;
 	randomSongIndexArr: number[];
+	showPlayerList: boolean;
 }
 
 export interface PlaylistStore {
