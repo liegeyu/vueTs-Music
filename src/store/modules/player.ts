@@ -131,9 +131,13 @@ const playerStore: Module<PlayerState, RootState> = {
           dispatch("playMusic", { id: state.playerList[++index].id })
         }
       } else if (state.loopType === 1) {
-        dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[index]].id});
+        let randomIndex = state.randomSongIndexArr.findIndex(i => i === index);
+        if (randomIndex === state.randomSongIndexArr.length - 1) {
+          dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[0]].id});
+        } else {
+          dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[++randomIndex]].id});
+        }
       }
-      
     },
     // 上一首歌曲
     prevSong({ dispatch, state, rootGetters }) {
@@ -145,7 +149,12 @@ const playerStore: Module<PlayerState, RootState> = {
           dispatch("playMusic", { id: state.playerList[--index].id })
         }
       } else if (state.loopType === 1) {
-        dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[index]].id});
+        let randomIndex = state.randomSongIndexArr.findIndex(i => i === index);
+        if (randomIndex === 0) {
+          dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[state.randomSongIndexArr.length - 1]].id});
+        } else {
+          dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[--randomIndex]].id});
+        }
       }
     },
     // 重新播放歌曲
@@ -155,8 +164,7 @@ const playerStore: Module<PlayerState, RootState> = {
     },
     // 随机播放歌曲
     randomPlaySong({ dispatch, state, rootGetters }) {
-      let index = rootGetters.currentMusicIndex;
-      dispatch("playMusic", { id: state.playerList[state.randomSongIndexArr[index]].id});
+      dispatch("nextSong");
     },
     // 监控歌曲
     monitorSong({ commit, dispatch, state }) {

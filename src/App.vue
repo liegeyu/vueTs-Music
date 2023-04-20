@@ -2,8 +2,6 @@
   <router-view />
 </template>
 
-<script setup lang="ts">
-import { ElButton } from "element-plus";
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>
