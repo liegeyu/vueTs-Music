@@ -61,7 +61,6 @@ const clickCard = (card) => {
 onMounted(async () => {
   const res = await getPersonalized();
   cardsData.value = res.result;
-  console.log(cardsData.value.slice(0, 10));
 });
 </script>
 

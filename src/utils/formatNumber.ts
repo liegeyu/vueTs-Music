@@ -1,11 +1,12 @@
 // 格式时间
-export const formatDuration = (time: number): string => {
+export const formatDuration = (time: number | null | undefined): string => {
+  if (Number.isNaN(time) || time == null) {
+    return "00:00"
+  }
   const s = Math.floor(time) % 60;
-  time = Math.floor(time / 60);
-  const m = time % 60;
+  const m = Math.floor(time / 60) % 60;
   const mm = m < 10 ? `0${m}` : m;
   const ss = s < 10 ? `0${s}` : s;
-
   return `${mm} : ${ss}`;
 }
 

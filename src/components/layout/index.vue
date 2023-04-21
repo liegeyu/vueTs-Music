@@ -10,10 +10,16 @@
       <div class="app-content bg-vice">
         <el-scrollbar>
           <div class="main-content">
-            <keep-alive v-if="$route.meta.keepAlive">
+            <!-- <keep-alive v-if="$route.meta.keepAlive">
               <router-view></router-view>
             </keep-alive>
-            <router-view v-else></router-view>
+            <router-view v-else></router-view> -->
+            <router-view v-slot="{ Component }">
+              <keep-alive v-if="$route.meta.keepAlive">
+                <component :is="Component"></component>
+              </keep-alive>
+              <component v-else :is="Component"></component>
+            </router-view>
           </div>
         </el-scrollbar>
         <Drawer v-if="showPlayerList" />

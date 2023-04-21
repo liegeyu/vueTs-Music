@@ -18,7 +18,7 @@
         >
       </div>
       <div class="playlist-actions">
-        <div class="play-allbtn">
+        <div class="play-allbtn" @click="palyAllSong">
           <!-- 图标 -->
           <IconPark
             :icon="Play"
@@ -42,7 +42,15 @@
       </div>
       <div class="playlist-tags">
         <span class="tags-header">标签：</span>
-        <div class="tags-main">伤感 / 榜单</div>
+        <div class="tags-main">
+          <div
+            v-for="(tag, index) in playlist?.tags"
+            :key="index"
+            style="margin-left: 0.5rem"
+          >
+            #{{ tag }}
+          </div>
+        </div>
       </div>
       <div class="playlist-description">
         <span class="des-header">简介：</span>
@@ -53,18 +61,35 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
+import { useStore } from "vuex";
+
 import IconPark from "@/components/common/IconPark.vue";
 import MoreText from "@/components/common/MoreText.vue";
 import { PlayListDetail } from "@/types/playlist-types";
 import { Play, Add } from "@icon-park/vue-next";
 import { formatTimeStamp } from "@/utils/formatNumber";
-
+// tags Array
 defineProps({
   playlist: {
     type: Object,
   },
 });
+
+const store = useStore();
+const songList = computed(() => store.getters.songlist);
+
+const palyAllSong = () => {
+  store.dispatch("player/playMusic", { id: songList.value[0]?.id });
+  // 将歌单歌曲存入 playerList
+  const songListId = store.getters.songListId;
+  const playerListId = store.getters.playerListId;
+  if (songListId !== playerListId) {
+    store.commit("player/setPlayerListId", songListId);
+    store.commit("player/setPlayerList", store.getters.songlist);
+    store.dispatch("player/initRandomSongIndexArr");
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -138,6 +163,7 @@ defineProps({
       }
       .tags-main {
         color: #85b9e6;
+        display: flex;
       }
     }
     .playlist-description {

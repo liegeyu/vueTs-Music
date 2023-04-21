@@ -49,6 +49,7 @@ import { Lock, Phone } from "@icon-park/vue-next";
 
 let username = ref<string>("");
 let password = ref<string>("");
+let profile = ref({});
 let isLogin = ref<boolean>(false);
 let showLogin = ref<boolean>(false);
 

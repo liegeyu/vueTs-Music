@@ -27,8 +27,6 @@ const props = defineProps({
     default: [],
   },
 });
-
-console.log(props.songlist);
 </script>
 
 <style scoped lang="scss">

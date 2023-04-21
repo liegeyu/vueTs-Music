@@ -71,7 +71,7 @@ export interface PlayerState {
 	musicId: number;
 	beforeVolume: number;
 	volume: number;
-	currentTime: number;
+	currentTime: number | string;
 	duration: number;
 	isMuted: boolean;
 	isPause: boolean;

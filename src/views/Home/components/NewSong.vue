@@ -38,7 +38,6 @@ let newSongList = ref([]);
 
 const playSong = (songItem) => {
   // 播放
-  console.log(songItem);
   const song = songItem.song;
   store.dispatch("player/playMusic", { id: song.id });
   // 存入songlist

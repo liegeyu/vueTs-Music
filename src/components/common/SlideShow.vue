@@ -34,7 +34,6 @@ const clickSlide = (item) => {};
 onMounted(async () => {
   const res = await getBanner({ type: 1 });
   imgData.value = res.banners;
-  console.log(imgData.value);
   loaded.value = true;
 });
 </script>

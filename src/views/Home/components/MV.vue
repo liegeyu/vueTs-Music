@@ -1,7 +1,12 @@
 <template>
   <LeadingTitle title="推荐MV" />
   <div class="Mv-card">
-    <div class="card-item" v-for="item in MvData" :key="item.id">
+    <div
+      class="card-item"
+      v-for="item in MvData"
+      :key="item.id"
+      @click="playMv(item)"
+    >
       <div class="card-cover">
         <div class="card-img">
           <img :src="item.picUrl" :alt="item.name" class="card-img" />
@@ -22,16 +27,28 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 import LeadingTitle from "@/components/common/LeadingTitle.vue";
 import { getPersonalizedMV } from "@/service/modules/recommend";
 import { PersonalizedMv } from "@/types/recommend-types";
 
+const router = useRouter();
 let MvData = ref<PersonalizedMv[]>([]);
+
+const playMv = (mv) => {
+  // 路由跳转
+  router.push({
+    name: "mvdetail",
+    query: {
+      id: mv.id,
+    },
+  });
+};
+
 onMounted(async () => {
   const res = await getPersonalizedMV();
   MvData.value = res.result;
-  console.log(MvData.value);
 });
 </script>
 

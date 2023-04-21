@@ -56,11 +56,15 @@ const playerStore: Module<PlayerState, RootState> = {
       state.isEnded = value;
     },
     setMusicTime(state, payload) {
-      state.currentTime = payload.curTime;
-      state.duration = payload.duration;
+      if (Number.isNaN(payload.curTime) || Number.isNaN(payload.duration)) {
+        state.currentTime = 0;
+        state.duration = 0;
+      } else {
+        state.currentTime = payload.curTime;
+        state.duration = payload.duration;
+      }
     },
     toggleShowPlayerList(state) {
-      console.log('111次')
       state.showPlayerList = !state.showPlayerList;
     },
     // 切换静音
@@ -83,6 +87,20 @@ const playerStore: Module<PlayerState, RootState> = {
       state.beforeVolume = state.volume;
       localStorage.setItem(KEYS.volume, volumeVal);
     },
+    // 清空所有 state
+    initState(state) {
+      state.audio.src = "";
+      state.audio.pause();
+      state.music = {} as Song;
+      state.musicUrl = {} as SongUrl;
+      state.playerList = [] as Song[];
+      state.playerListId = 0;
+      state.musicId = 0;
+      state.currentTime = 0;
+      state.duration = 0;
+      state.randomSongIndexArr = [] as number[];
+      state.isPause = false;
+    }
   },
   actions: {
     // 获取歌曲详情
