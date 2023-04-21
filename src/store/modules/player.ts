@@ -60,6 +60,7 @@ const playerStore: Module<PlayerState, RootState> = {
       state.duration = payload.duration;
     },
     toggleShowPlayerList(state) {
+      console.log('111次')
       state.showPlayerList = !state.showPlayerList;
     },
     // 切换静音

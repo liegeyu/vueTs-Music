@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, watchEffect, onMounted, onUnmounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -11,13 +11,18 @@ const drawer = ref<HTMLElement | null>(null);
 const showPlayerList = computed(() => store.getters.showPlayerList);
 
 const clickDrawerOutside = (e) => {
-  console.log(drawer.value);
-  console.log(e.target);
-  console.log("--------------------");
+  const playlistBtn = document?.querySelector(".playerlist-btn");
+  if (
+    playlistBtn &&
+    (playlistBtn === e.target || playlistBtn.contains(e.target))
+  ) {
+    return;
+  }
   const drawerEl = drawer.value;
   if (drawerEl && !drawerEl.contains(e.target as HTMLElement)) {
-    console.log("////");
-    store.commit("player/toggleShowPlayerList");
+    if (showPlayerList) {
+      store.commit("player/toggleShowPlayerList");
+    }
   }
 };
 

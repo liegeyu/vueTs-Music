@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     Comment: typeof import('./src/components/common/Comment.vue')['default']
     CommentItem: typeof import('./src/components/common/CommentItem.vue')['default']
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
-    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']
     Header: typeof import('./src/components/layout/header/index.vue')['default']
     IconPark: typeof import('./src/components/common/IconPark.vue')['default']
