@@ -3,7 +3,7 @@
 import { Menus } from './layout-types'
 import { SearchSuggest } from './search-types'
 import { Song, SongUrl } from "./player-types"
-import { MvUrl, MvDetail, MvDetailInfo, RelatedAllVideo } from "./mv-types";
+import { MvUrl, MvDetail, MvDetailInfo, VideoDetail, VideoUrl, RelatedAllVideo } from "./video-types";
 
 export interface RootState {}
 
@@ -87,8 +87,10 @@ export interface PlaylistStore {
 	songlist: Song[];
 }
 
-export interface MvDetailState {
+export interface VideoDetailState {
 	mvDetail: MvDetail;
 	mvUrl: MvUrl;
+	videoDetail: VideoDetail;
+	videoUrl: VideoUrl[];
 	relatedAllVideo: RelatedAllVideo[];
 }

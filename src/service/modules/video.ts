@@ -1,7 +1,7 @@
 // video 相关 api
 import Request from "../api/request";
 import { ApiRes } from "@/types/common-types";
-import { MvUrl, MvDetail, MvDetailInfo, RelatedAllVideo } from "@/types/mv-types";
+import { MvUrl, MvDetail, MvDetailInfo, RelatedAllVideo, VideoDetail, VideoUrl } from "@/types/video-types";
 
 // mv 数据
 export const getMvDetail = async (params) => {
@@ -27,7 +27,23 @@ export const getMvDetailInfo = async (params) => {
   })
 }
 
-// 相关视频
+// video 详情
+export const getVideoDetail = async (params) => {
+  return Request.get<ApiRes<VideoDetail>>({
+    url: "/video/detail",
+    params,
+  })
+}
+
+// video 地址
+export const getVideoUrl = async (params) => {
+  return Request.get<ApiRes<VideoUrl[]>>({
+    url: "/video/url",
+    params,
+  })
+}
+
+// 相关 video
 export const getRelatedAllVideo = async (params) => {
   return Request.get<ApiRes<RelatedAllVideo[]>>({
     url: "/related/allvideo",

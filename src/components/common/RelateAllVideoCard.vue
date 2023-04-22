@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { ref, defineProps } from "vue";
 import { useRouter } from "vue-router";
 
 defineProps({
@@ -27,9 +27,10 @@ defineProps({
 const router = useRouter();
 
 const playMv = (video) => {
-  router.replace({
-    name: "mvdetail",
+  router.push({
+    name: "videodetail",
     query: {
+      type: 0,
       id: video.vid,
     },
   });

@@ -39,8 +39,9 @@ let MvData = ref<PersonalizedMv[]>([]);
 const playMv = (mv) => {
   // 路由跳转
   router.push({
-    name: "mvdetail",
+    name: "videodetail",
     query: {
+      type: 1,
       id: mv.id,
     },
   });

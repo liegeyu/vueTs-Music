@@ -7,7 +7,7 @@ import layout from './modules/layout';
 import search from './modules/search';
 import player from './modules/player';
 import playlist from './modules/playlist';
-import mvdetail from './modules/mvdetail';
+import videodetail from './modules/videodetail';
 
 const store: Store<RootState> = createStore ({
   modules: {
@@ -16,7 +16,7 @@ const store: Store<RootState> = createStore ({
     search,
     player,
     playlist,
-    mvdetail,
+    videodetail,
   },
   getters
 })

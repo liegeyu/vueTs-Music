@@ -36,11 +36,11 @@ const routes: RouteRecordRaw[] = [
         } 
       },
       {
-        path: '/mvdetail',
-        name: 'mvdetail',
-        component: () => import('@/views/MVDetail/index.vue'),
+        path: '/videodetail',
+        name: 'videodetail',
+        component: () => import('@/views/VideoDetail/index.vue'),
         meta: {
-          menu: 'mvdetail',
+          menu: 'videodetail',
         }
       },
       {
