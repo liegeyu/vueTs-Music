@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
           menu: 'video',
           title: '视频',
           keepAlive: true,
-        }
+        } 
       },
       {
         path: '/mvdetail',

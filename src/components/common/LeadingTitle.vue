@@ -1,18 +1,28 @@
 <template>
-  <div class="lead-title">
-    <span>{{ title }}</span>
-    <IconPark
-      style="display: flex; align-items: center"
-      :icon="Right"
-      :size="25"
-      :stroke-width="2"
-    />
+  <div style="display: inline-block">
+    <div class="lead-title" @click="clickLead">
+      <IconPark
+        v-if="lead"
+        style="display: flex; align-items: center"
+        :icon="Left"
+        :size="25"
+        :stroke-width="2"
+      />
+      <span>{{ title }}</span>
+      <IconPark
+        v-if="!lead"
+        style="display: flex; align-items: center"
+        :icon="Right"
+        :size="25"
+        :stroke-width="2"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineComponent, defineProps, PropType } from "vue";
-import { Right } from "@icon-park/vue-next";
+import { Left, Right } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
 
 interface Title {
@@ -24,7 +34,15 @@ defineProps({
     type: String as PropType<Title["title"]>,
     default: "",
   },
+  lead: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const clickLead = () => {
+  console.log("click lead");
+};
 </script>
 
 <style lang="scss" scoped>

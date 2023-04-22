@@ -18,4 +18,7 @@ export default {
   isMuted: (state) => { return state.player.isMuted },
   loopType: (state) => { return state.player.loopType },
   showPlayerList: (state) => { return state.player.showPlayerList },
+  mvDetail: (state) => { return state.mvdetail.mvDetail },
+  mvUrl: (state) => { return state.mvdetail.mvUrl },
+  relatedAllVideo: (state) => { return state.mvdetail.relatedAllVideo },
 }
