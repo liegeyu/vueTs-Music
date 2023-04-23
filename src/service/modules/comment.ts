@@ -22,6 +22,22 @@ import { CommentPlaylist } from "@/types/comment-types";
 export const getCommentPlaylist = (params) => {
   return Request.get<CommentPlaylist>({
     url: "/comment/playlist",
-    params
+    params,
+  })
+}
+
+// mv 评论
+export const getCommentMv = (params) => {
+  return Request.get<CommentPlaylist>({
+    url: "/comment/mv",
+    params,
+  })
+}
+
+// video 评论
+export const getCommentVideo = (params) => {
+  return Request.get<CommentPlaylist>({
+    url: "/comment/video",
+    params,
   })
 }

@@ -40,9 +40,9 @@ defineProps({
   },
 });
 
-const clickLead = () => {
-  console.log("click lead");
-};
+// const clickLead = () => {
+//   console.log("click lead");
+// };
 </script>
 
 <style lang="scss" scoped>

@@ -55,7 +55,7 @@ const showPlayerList = computed(() => store.getters.showPlayerList);
 
   .app-aside {
     width: 16rem;
-    min-width: 170px;
+    min-width: 200px;
     height: 100vh;
   }
 

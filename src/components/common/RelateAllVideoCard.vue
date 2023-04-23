@@ -2,6 +2,8 @@
   <div class="mvBox-item" @click="playMv(video)">
     <div class="item-cover">
       <img :src="video?.coverUrl" :alt="video?.title" />
+      <span class="play-time">播放 {{ formatNumber(video?.playTime) }}</span>
+      <span class="duration">{{ formatDurationMs(video?.durationms) }}</span>
     </div>
     <div class="item-des">
       <span class="video-title">{{ video?.title }}</span>
@@ -16,6 +18,7 @@
 <script setup lang="ts">
 import { ref, defineProps } from "vue";
 import { useRouter } from "vue-router";
+import { formatNumber, formatDurationMs } from "@/utils/formatNumber";
 
 defineProps({
   video: {
@@ -47,9 +50,22 @@ const playMv = (video) => {
   margin-bottom: 2rem;
   cursor: pointer;
   .item-cover {
+    position: relative;
     img {
       width: 18rem;
       border-radius: 0.5rem;
+    }
+    .play-time {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      z-index: 10;
+    }
+    .duration {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      z-index: 10;
     }
   }
   .item-des {

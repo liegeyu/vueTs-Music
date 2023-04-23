@@ -7,9 +7,7 @@
         <div class="comment-text">{{ commentDetail.content }}</div>
       </div>
       <div class="comment-des">
-        <span class="comment-time">{{
-          `${commentDetail.timeStr} ${commentDetail.time}`
-        }}</span>
+        <span class="comment-time">{{ `${commentDetail.timeStr}` }}</span>
         <div class="like-count">
           <IconPark
             :icon="ThumbsUp"

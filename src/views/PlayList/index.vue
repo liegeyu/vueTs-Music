@@ -7,7 +7,7 @@
           <SonglistData :songlist="songlist" />
         </el-tab-pane>
         <el-tab-pane lazy :label="`评论(${commentCount})`" name="comments">
-          <Comment :playlistId="playlistId" />
+          <Comment :commentId="playlistId" :commentType="10" />
         </el-tab-pane>
       </el-tabs>
     </div>

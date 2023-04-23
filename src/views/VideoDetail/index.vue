@@ -4,6 +4,7 @@
       <LeadingTitle
         :title="viewType === 1 ? 'MV详情' : '视频详情'"
         :lead="true"
+        @click="clickLead"
       />
       <div class="mv-box">
         <div class="mv">
@@ -83,7 +84,15 @@
           </div>
         </div>
       </div>
-      <div class="mvdetail-comment"></div>
+      <div class="mvdetail-comment">
+        <div class="comment-title">
+          <span>评论</span>
+          <span>({{ 13223 }})</span>
+        </div>
+        <div class="comment-body">
+          <Comment :commentId="videoId" :commentType="viewType" />
+        </div>
+      </div>
     </div>
     <div class="mvdetail-right">
       <span class="right-title">相关推荐</span>
@@ -98,21 +107,29 @@
 
 <script setup lang="ts">
 import { ref, toRefs, onMounted, watch, getCurrentInstance } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
+import Comment from "@/components/common/Comment.vue";
 import LeadingTitle from "@/components/common/LeadingTitle.vue";
 import RelateAllVideoCard from "@/components/common/RelateAllVideoCard.vue";
 import { formatTimeStamp } from "@/utils/formatNumber";
 
 const route = useRoute();
+const router = useRouter();
 const store = useStore();
 const instance = getCurrentInstance();
 const { mvDetail, mvUrl, videoDetail, videoUrl, relatedAllVideo } = toRefs(
   store.getters
 );
 let videoId = ref<string | string[]>(route.query.id);
-let viewType = ref<number>(Number(route.query.type));
+let viewType = ref<number>(Number(route.query.type)); // 0 video 1 mv
+
+const clickLead = () => {
+  router.replace({
+    name: "video",
+  });
+};
 
 watch(
   () => [route.query.type, route.query.id],
@@ -210,6 +227,15 @@ onMounted(async () => {
       }
     }
     .mvdetail-comment {
+      .comment-title {
+        padding: 1rem 0;
+      }
+      .comment-title span {
+        color: #fff;
+        font-size: 1.45rem;
+        padding: 1.45rem 0 0.75rem;
+        font-weight: bold;
+      }
     }
   }
   .mvdetail-right {
@@ -224,7 +250,6 @@ onMounted(async () => {
       font-weight: bold;
       display: flex;
       align-items: center;
-      cursor: pointer;
     }
   }
 }

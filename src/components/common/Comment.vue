@@ -53,20 +53,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, defineProps, onMounted } from "vue";
+import { ref, reactive, watch, defineProps, onMounted } from "vue";
 
 import CommentItem from "./CommentItem.vue";
 import IconPark from "@/components/common/IconPark.vue";
 import { Pound, AtSign, EmotionHappy } from "@icon-park/vue-next";
-import { getCommentPlaylist } from "@/service/modules/comment";
-import { Comments, HotComment } from "@/types/comment-types";
+import {
+  getCommentPlaylist,
+  getCommentMv,
+  getCommentVideo,
+} from "@/service/modules/comment";
+import { Comments, HotComment, CommentPlaylist } from "@/types/comment-types";
 import { useLoading } from "@/hooks/useLoading";
 
 const { loading, showLoading, hideLoading } = useLoading();
 const props = defineProps({
-  playlistId: {
-    type: Number,
+  commentId: {
+    type: String,
     defalut: null,
+  },
+  commentType: {
+    type: Number,
+    default: 10, // 0 video 评论 1 mv 评论 10 歌单评论
   },
 });
 
@@ -74,13 +82,32 @@ let textValue = ref<string>("");
 let comments = ref<Comments[]>([]);
 let hotComments = ref<HotComment[]>([]);
 
-onMounted(async () => {
-  showLoading();
-  const res = await getCommentPlaylist({ id: props.playlistId });
+watch(
+  () => [props.commentId, props.commentType],
+  async (newVal) => {
+    showLoading();
+    await loadingComment(newVal[1], newVal[0]);
+    hideLoading();
+  }
+);
+
+const loadingComment = async (type, commentId) => {
+  let res = {} as CommentPlaylist;
+  if (type === 10) {
+    res = await getCommentPlaylist({ id: commentId });
+  } else if (type === 0) {
+    res = await getCommentVideo({ id: commentId });
+  } else if (type === 1) {
+    res = await getCommentMv({ id: commentId });
+  }
   hotComments.value = res.hotComments;
   comments.value = res.comments;
+};
+
+onMounted(async () => {
+  showLoading();
+  await loadingComment(props.commentType, props.commentId);
   hideLoading();
-  console.log(hotComments.value);
 });
 </script>
 
