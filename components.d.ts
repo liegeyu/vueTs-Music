@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']

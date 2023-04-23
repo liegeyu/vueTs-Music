@@ -47,6 +47,15 @@
         <template v-for="(item, index) in comments" :key="index">
           <CommentItem :commentDetail="item" />
         </template>
+        <div class="pagination">
+          <el-pagination
+            small
+            background
+            v-model:current-page="currentCommentPage"
+            layout="prev, pager, next"
+            :total="1000"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -81,6 +90,7 @@ const props = defineProps({
 let textValue = ref<string>("");
 let comments = ref<Comments[]>([]);
 let hotComments = ref<HotComment[]>([]);
+let currentCommentPage = ref<number>(1);
 
 watch(
   () => [props.commentId, props.commentType],
@@ -154,6 +164,16 @@ onMounted(async () => {
       }
       .put-comment {
         font-size: 1.1rem;
+      }
+    }
+  }
+
+  .comment-main {
+    .comment-wrapper {
+      .pagination {
+        display: flex;
+        justify-content: center;
+        padding: 1rem 0;
       }
     }
   }

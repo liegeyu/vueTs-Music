@@ -30,6 +30,49 @@
   }
 }
 
+// el-pagination
+.el-pagination.is-background .btn-prev:disabled {
+  color: #fff !important;
+  background-color: #3a3a3a !important;
+}
+
+.el-pagination.is-background .btn-prev {
+  color: #fff !important;
+  background-color: #3a3a3a !important;
+}
+
+.el-pagination.is-background .el-pager li.is-active {
+  color: #fff;
+  background-color: #34d399 !important;
+  cursor: default;
+}
+.el-pagination.is-background .el-pager li {
+  color: #fff;
+  background-color: #2b2b2b !important;
+  border: 1px solid #474648;
+  border-radius: 0.3rem;
+  cursor: default;
+}
+
+.el-pagination.is-background .btn-next:disabled {
+  color: #fff !important;
+  background-color: #3a3a3a !important;
+}
+
+.el-pagination.is-background .btn-next {
+  color: #fff !important;
+  background-color: #3a3a3a !important;
+}
+
+//按钮
+.white-list-tool.is-background .btn-next .el-icon-arrow-right {
+  margin: 0 auto;
+}
+.white-list-tool.is-background .btn-prev .el-icon-arrow-left {
+  margin: 0 auto;
+}
+
+
 // el-slider
 
 // .el-textarea__inner
