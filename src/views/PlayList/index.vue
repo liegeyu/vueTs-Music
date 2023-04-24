@@ -28,10 +28,10 @@ import {
 } from "@/service/modules/playlist";
 import { PlayListDetail, SongList } from "@/types/playlist-types";
 import { useLoading } from "@/hooks/useLoading";
-const { loading, showLoading, hideLoading } = useLoading();
 
 const route = useRoute();
 const store = useStore();
+const { loading, showLoading, hideLoading } = useLoading();
 let loaded = ref<boolean>(false);
 const playlistId = ref<string | string[]>(route.query.id);
 let tabValue = ref<string>("songlist");

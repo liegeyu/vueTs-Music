@@ -53,7 +53,9 @@
             background
             v-model:current-page="currentCommentPage"
             layout="prev, pager, next"
-            :total="1000"
+            :total="commentTotal"
+            :page-size="20"
+            @current-change="changePage"
           />
         </div>
       </div>
@@ -90,28 +92,51 @@ const props = defineProps({
 let textValue = ref<string>("");
 let comments = ref<Comments[]>([]);
 let hotComments = ref<HotComment[]>([]);
+let commentTotal = ref<number>(0);
 let currentCommentPage = ref<number>(1);
+let pageSize = 20;
+
+const changePage = async (newPage) => {
+  currentCommentPage.value = newPage;
+  console.log("change page", currentCommentPage.value);
+
+  showLoading();
+  await loadingComment(
+    props.commentType,
+    props.commentId,
+    (currentCommentPage.value - 1) * pageSize
+  );
+  hideLoading();
+};
 
 watch(
   () => [props.commentId, props.commentType],
   async (newVal) => {
     showLoading();
     await loadingComment(newVal[1], newVal[0]);
+    currentCommentPage.value = 1;
     hideLoading();
   }
 );
 
-const loadingComment = async (type, commentId) => {
+const loadingComment = async (type, commentId, offset = 0) => {
   let res = {} as CommentPlaylist;
+  let params = {
+    id: commentId,
+    offset: (currentCommentPage.value - 1) * 20,
+  };
   if (type === 10) {
-    res = await getCommentPlaylist({ id: commentId });
+    res = await getCommentPlaylist(params);
   } else if (type === 0) {
-    res = await getCommentVideo({ id: commentId });
+    res = await getCommentVideo(params);
   } else if (type === 1) {
-    res = await getCommentMv({ id: commentId });
+    res = await getCommentMv(params);
   }
-  hotComments.value = res.hotComments;
+  if (res.hotComments !== undefined) {
+    hotComments.value = res?.hotComments;
+  }
   comments.value = res.comments;
+  commentTotal.value = res.total;
 };
 
 onMounted(async () => {

@@ -159,3 +159,13 @@ export interface VideoUrl {
 	payInfo?: any;
 	r: number;
 }
+
+// videogrouplist
+export interface VideoGroup {
+	id: number;
+	name: string;
+	url?: any;
+	relatedVideoType?: any;
+	selectTab: boolean;
+	abExtInfo?: any;
+}

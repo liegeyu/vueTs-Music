@@ -38,15 +38,26 @@
       >
         登录
       </button>
+
+      <button
+        @click="visitorLoginSubmit"
+        class="button-box"
+        style="border-radius: 5px"
+      >
+        游客登录
+      </button>
     </div>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useStore } from "vuex";
 
 import { Lock, Phone } from "@icon-park/vue-next";
+import userStore from "@/store/modules/user";
 
+const store = useStore();
 let username = ref<string>("");
 let password = ref<string>("");
 let profile = ref({});
@@ -54,6 +65,9 @@ let isLogin = ref<boolean>(false);
 let showLogin = ref<boolean>(false);
 
 const loginSubmit = () => {};
+const visitorLoginSubmit = () => {
+  store.dispatch("user/fetchVisitorLogin");
+};
 </script>
 
 <style lang="scss" scoped>

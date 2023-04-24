@@ -3,6 +3,7 @@
 import { Menus } from './layout-types'
 import { SearchSuggest } from './search-types'
 import { Song, SongUrl } from "./player-types"
+import { UserProfile } from "./user-types"
 import { MvUrl, MvDetail, MvDetailInfo, VideoDetail, VideoUrl, RelatedAllVideo } from "./video-types";
 
 export interface RootState {}
@@ -10,48 +11,9 @@ export interface RootState {}
 export interface UserState {
   token: string;
   cookie: string;
+	userId: number;
   showLogin: boolean;
   profile: UserProfile;
-}
-
-export interface UserProfile {
-  userId: number;
-	userType: number;
-	nickname: string;
-	avatarImgId: number;
-	avatarUrl: string;
-	backgroundImgId: number;
-	backgroundUrl: string;
-	signature?: any;
-	createTime: number;
-	userName: string;
-	accountType: number;
-	shortUserName: string;
-	birthday: number;
-	authority: number;
-	gender: number;
-	accountStatus: number;
-	province: number;
-	city: number;
-	authStatus: number;
-	description?: any;
-	detailDescription?: any;
-	defaultAvatar: boolean;
-	expertTags?: any;
-	experts?: any;
-	djStatus: number;
-	locationStatus: number;
-	vipType: number;
-	followed: boolean;
-	mutual: boolean;
-	authenticated: boolean;
-	lastLoginTime: number;
-	lastLoginIP: string;
-	remarkName?: any;
-	viptypeVersion: number;
-	authenticationTypes: number;
-	avatarDetail?: any;
-	anchor: boolean;
 }
 
 export interface LayoutState {
