@@ -1,5 +1,10 @@
 export default {
   menus: (state) => { return state.layout.menus },
+  qrImg: (state) => { return state.user.qrImg },
+  qrState: (state) => { return state.user.qrState },
+  userAccount: (state) => { return state.user.account },
+  userProfile: (state) => { return state.user.profile },
+  showLogin: (state) => { return state.user.showLogin },
   songListId: (state) => { return state.playlist.songListId },
   songlist: (state) => { return state.playlist.songlist },
   music: (state) => { return state.player.music },

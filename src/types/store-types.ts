@@ -3,8 +3,15 @@
 import { Menus } from './layout-types'
 import { SearchSuggest } from './search-types'
 import { Song, SongUrl } from "./player-types"
-import { UserProfile } from "./user-types"
-import { MvUrl, MvDetail, MvDetailInfo, VideoDetail, VideoUrl, RelatedAllVideo } from "./video-types";
+import { UserProfile, Account } from "./user-types"
+import { 
+	MvUrl, 
+	MvDetail, 
+	MvDetailInfo, 
+	VideoDetail, 
+	VideoUrl, 
+	RelatedAllVideo 
+} from "./video-types";
 
 export interface RootState {}
 
@@ -12,8 +19,13 @@ export interface UserState {
   token: string;
   cookie: string;
 	userId: number;
+	qrKey: string;
+	qrUrl: string;
+	qrImg: string;
+	qrState: number;
   showLogin: boolean;
   profile: UserProfile;
+	account: Account;
 }
 
 export interface LayoutState {

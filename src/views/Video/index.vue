@@ -71,6 +71,7 @@ onMounted(async () => {
   console.log(currentGroup.value);
   const videoListByGroupRes = await getVideoListByGroup({
     id: currentGroup.value.id,
+    cookie: sessionStorage.getItem("cookie"),
   });
   console.log(videoListByGroupRes);
 });
@@ -104,6 +105,7 @@ onMounted(async () => {
       max-width: 1250px;
       margin: 0 auto;
       position: relative;
+      z-index: 1000;
       .popo-btn {
         text-align: center;
         display: inline-block;

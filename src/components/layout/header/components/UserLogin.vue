@@ -1,13 +1,21 @@
 <template>
   <div class="login-container">
     <ElAvatar
-      size="small"
+      :size="35"
       round
       class="bg-gray-200"
-      :src="profile?.avatarUrl ?? ''"
+      :src="userProfile?.avatarUrl ?? ''"
     ></ElAvatar>
-    <span class="login-title" v-if="isLogin">{{ profile.nickname }}</span>
+    <span
+      class="login-title"
+      v-if="isLogin"
+      @click="showLogout = !showLogout"
+      >{{ userProfile.nickname }}</span
+    >
     <span class="login-title" @click="showLogin = true" v-else>点击登录</span>
+    <div class="logout" v-if="showLogout">
+      <span @click="clickLogout">退出登录</span>
+    </div>
   </div>
   <el-dialog
     class="dialog-container"
@@ -16,7 +24,12 @@
     width="330px"
     append-to-body
   >
-    <div>
+    <div class="QR-container" v-if="showQRCode">
+      <img width="225" height="225" :src="qrImg" />
+      <span style="text-align: center; padding: 1rem 0">{{ qrMsg }}</span>
+      <p style="color: #82aaff; cursor: pointer" @click="clickBack">返回</p>
+    </div>
+    <div v-else>
       <el-input
         size="large"
         placeholder="手机号码"
@@ -36,7 +49,15 @@
         class="button-box"
         style="border-radius: 5px"
       >
-        登录
+        登录(暂不可用)
+      </button>
+
+      <button
+        @click="scanTologinSubmit"
+        class="button-box"
+        style="border-radius: 5px"
+      >
+        扫码登录
       </button>
 
       <button
@@ -44,30 +65,76 @@
         class="button-box"
         style="border-radius: 5px"
       >
-        游客登录
+        游客登录(相当于不登录)
       </button>
     </div>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 
 import { Lock, Phone } from "@icon-park/vue-next";
 import userStore from "@/store/modules/user";
 
 const store = useStore();
+const qrImg = computed(() => store.getters.qrImg);
+const qrState = computed(() => store.getters.qrState);
+const userAccount = computed(() => store.getters.userAccount);
+const userProfile = computed(() => store.getters.userProfile);
+const isLogin = computed(() => store.getters.showLogin);
 let username = ref<string>("");
 let password = ref<string>("");
-let profile = ref({});
-let isLogin = ref<boolean>(false);
+let showLogout = ref<boolean>(false);
 let showLogin = ref<boolean>(false);
+let showQRCode = ref<boolean>(false);
 
-const loginSubmit = () => {};
+const qrMsg = computed(() => {
+  switch (qrState.value) {
+    case 800:
+      return "二维码过期";
+    case 801:
+      return "请使用APP扫码登录";
+    case 802:
+      return "授权中";
+    case 803:
+      store.dispatch("user/fetchLoginStatus");
+      showLogin.value = false;
+      return "授权成功";
+    default:
+      return "请使用APP扫码登录";
+  }
+});
+
+// 扫码登录
+const scanTologinSubmit = () => {
+  showQRCode.value = true;
+  store.dispatch("user/fetchQRCodeLogin");
+};
+
+// 退出登录
+const clickLogout = () => {
+  store.dispatch("user/fetchLogOut");
+  showLogout.value = false;
+};
+
+const clickBack = () => {
+  showQRCode.value = false;
+};
+
+const loginSubmit = () => {
+  alert("暂不可用");
+};
+
 const visitorLoginSubmit = () => {
+  alert("此登录等价于不登录, 望知...");
   store.dispatch("user/fetchVisitorLogin");
 };
+
+onMounted(() => {
+  store.dispatch("user/fetchLoginStatus");
+});
 </script>
 
 <style lang="scss" scoped>
@@ -77,13 +144,25 @@ const visitorLoginSubmit = () => {
   display: flex;
   align-items: center;
   cursor: pointer;
-  &:hover {
-    color: #34d399;
-  }
 
   .login-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-left: 0.5rem;
+    &:hover {
+      color: #34d399;
+    }
+  }
+
+  .logout {
+    position: absolute;
+    background-color: #363636;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    top: 4rem;
+    right: 8.5rem;
+    &:hover {
+      color: #34d399;
+    }
   }
 }
 
@@ -128,5 +207,12 @@ const visitorLoginSubmit = () => {
   color: var(--el-text-color-regular);
   font-size: var(--el-dialog-content-font-size);
   word-break: break-all;
+}
+
+.QR-container {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
 }
 </style>
