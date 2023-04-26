@@ -1,5 +1,5 @@
-import { markRaw } from 'vue'
-import { Module } from 'vuex'
+import { markRaw } from 'vue';
+import { Module } from 'vuex';
 
 import { RootState, LayoutState } from '@/types/store-types';
 import {

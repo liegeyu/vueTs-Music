@@ -69,3 +69,12 @@ export interface VideoDetailState {
 	videoUrl: VideoUrl[];
 	relatedAllVideo: RelatedAllVideo[];
 }
+
+export interface VideoState {
+	selectArea: string;
+	selectKind: string;
+	selectOrder: string;
+	areas: string[];
+	kinds: string[];
+	orders: string[];
+}

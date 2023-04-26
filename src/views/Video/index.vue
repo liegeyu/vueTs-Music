@@ -71,13 +71,6 @@ const clickGroupTag = () => {
   showGroupTag.value = !showGroupTag.value;
 };
 
-let arr = ref<number[]>(new Array(20).fill(0));
-const handlerMore = () => {
-  for (let i = 0; i < 20; i++) {
-    arr.value.push(i);
-  }
-};
-
 const changeGroup = async (group) => {
   currentGroup.value = group;
   videoOffset.value = 0;
@@ -93,7 +86,7 @@ const scrollHandler = async (e) => {
   let elScrollTop = el.scrollTop;
   let clientHeight = document.documentElement.clientHeight;
   let elHeight = el.scrollHeight;
-  console.log("---scroll---");
+
   if (elScrollTop + clientHeight - 100 >= elHeight) {
     await getVideoListGroup(false);
   }
@@ -103,6 +96,8 @@ const scrollHandler = async (e) => {
 const getVideoListGroup = async (first = true) => {
   if (!first) {
     videoOffset.value++;
+    console.log(videoOffset.value);
+
     const videoListByGroupRes = await getVideoListByGroup({
       id: currentGroup.value.id,
       cookie: sessionStorage.getItem("cookie"),
@@ -119,9 +114,10 @@ const getVideoListGroup = async (first = true) => {
     videoListByGroup.value.push(...videoListByGroupRes.datas);
   } else {
     let num = 1;
-    console.log(currentGroup.value.id);
+
     while (num++ <= 3) {
       videoOffset.value++;
+      console.log(videoOffset.value);
       const videoListByGroupRes = await getVideoListByGroup({
         id: currentGroup.value.id,
         cookie: sessionStorage.getItem("cookie"),
@@ -138,7 +134,6 @@ const getVideoListGroup = async (first = true) => {
       videoListByGroup.value.push(...videoListByGroupRes.datas);
     }
   }
-  console.log(videoListByGroup.value);
 };
 
 onMounted(async () => {
@@ -186,7 +181,8 @@ onUnmounted(() => {
     }
 
     .lead-popo {
-      max-width: 1250px;
+      max-width: 1150px;
+      min-width: 1100px;
       margin: 0 auto;
       position: relative;
       z-index: 1000;
@@ -269,7 +265,7 @@ onUnmounted(() => {
       height: calc(100vh - 20rem);
 
       p {
-        padding-top: 5rem;
+        padding-top: 7rem;
         text-align: center;
         color: #8b8b8b;
       }

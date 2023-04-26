@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import { onMounted, defineProps } from "vue";
+import { useRouter } from "vue-router";
 
 import { formatDurationMs, formatNumber } from "@/utils/formatNumber.ts";
 
@@ -35,14 +36,25 @@ defineProps({
   },
 });
 
-const clickVideo = () => {};
+const router = useRouter();
+
+const clickVideo = (video) => {
+  router.push({
+    name: "videodetail",
+    query: {
+      type: 0,
+      id: video.data.vid,
+    },
+  });
+};
 
 onMounted(async () => {});
 </script>
 
 <style scoped lang="scss">
 .videoList-container {
-  max-width: 1250px;
+  max-width: 1150px;
+  min-width: 1100px;
   margin: 2rem auto 0;
   display: grid;
   grid-template-columns: auto auto auto auto;
