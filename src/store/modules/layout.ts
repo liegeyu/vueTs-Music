@@ -17,6 +17,7 @@ import {
 const layoutStore: Module<LayoutState, RootState> = {
   namespaced: true,
   state: {
+    scrollBar: {} as HTMLElement,
     menus: [
       {
         name: "在线音乐",
@@ -77,6 +78,11 @@ const layoutStore: Module<LayoutState, RootState> = {
         ],
       },
     ]
+  },
+  mutations: {
+    setScrollBar(state, value) {
+      state.scrollBar = value;
+    }
   }
 }
 

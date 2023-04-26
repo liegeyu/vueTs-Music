@@ -25,7 +25,10 @@
                 </div>
               </div>
             </div>
-            <VideoList />
+            <div class="none-video" v-if="showNoneVideo">
+              <p>暂无推荐视频</p>
+            </div>
+            <VideoList v-else :videoGroupList="videoListByGroup" />
           </div>
         </el-tab-pane>
         <el-tab-pane lazy label="MV" name="mvBox">
@@ -37,43 +40,124 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted, computed, reactive } from "vue";
+import { useStore } from "vuex";
 
 import VideoList from "./components/VideoList.vue";
 import MvBox from "./components/MvBox.vue";
-import { VideoGroup } from "@/types/video-types";
+import {
+  VideoLists,
+  VideoGrouplist,
+  VideoListDatas,
+} from "@/types/video-types";
 import {
   getVideoGroupList,
   getVideoListByGroup,
 } from "@/service/modules/video";
+import { throttle } from "@/utils/throttle-debounce";
 
-const popoGroup = ref<HTMLElement | null>(null);
+const store = useStore();
+const scrollBar = computed<HTMLElement>(() => store.getters.scrollBar);
+
+let videoOffset = ref<number>(0);
 let tabValue = ref<string>("videoBox");
 let showGroupTag = ref<boolean>(false);
-let videoGroupList = ref<VideoGroup[]>([]);
-let currentGroup = ref<VideoGroup>({} as VideoGroup);
+let showNoneVideo = ref<boolean>(false);
+let videoGroupList = ref<VideoGrouplist[]>([]);
+let currentGroup = ref<VideoGrouplist>({} as VideoGrouplist);
+let videoListByGroup = ref<VideoListDatas[]>([] as VideoListDatas[]);
 
 const clickGroupTag = () => {
   showGroupTag.value = !showGroupTag.value;
 };
 
-const changeGroup = (group) => {
+let arr = ref<number[]>(new Array(20).fill(0));
+const handlerMore = () => {
+  for (let i = 0; i < 20; i++) {
+    arr.value.push(i);
+  }
+};
+
+const changeGroup = async (group) => {
   currentGroup.value = group;
+  videoOffset.value = 0;
+  videoListByGroup.value = [];
   if (showGroupTag.value) {
     showGroupTag.value = false;
   }
+  await getVideoListGroup(true);
+};
+
+const scrollHandler = async (e) => {
+  const el = e.target as HTMLElement;
+  let elScrollTop = el.scrollTop;
+  let clientHeight = document.documentElement.clientHeight;
+  let elHeight = el.scrollHeight;
+  console.log("---scroll---");
+  if (elScrollTop + clientHeight - 100 >= elHeight) {
+    await getVideoListGroup(false);
+  }
+};
+
+// 获取一组 video
+const getVideoListGroup = async (first = true) => {
+  if (!first) {
+    videoOffset.value++;
+    const videoListByGroupRes = await getVideoListByGroup({
+      id: currentGroup.value.id,
+      cookie: sessionStorage.getItem("cookie"),
+      offset: videoOffset.value,
+    });
+
+    if (videoListByGroupRes.datas.length === 0) {
+      showNoneVideo.value = true;
+      return;
+    } else {
+      showNoneVideo.value = false;
+    }
+
+    videoListByGroup.value.push(...videoListByGroupRes.datas);
+  } else {
+    let num = 1;
+    console.log(currentGroup.value.id);
+    while (num++ <= 3) {
+      videoOffset.value++;
+      const videoListByGroupRes = await getVideoListByGroup({
+        id: currentGroup.value.id,
+        cookie: sessionStorage.getItem("cookie"),
+        offset: videoOffset.value,
+      });
+
+      if (videoListByGroupRes.datas.length === 0) {
+        showNoneVideo.value = true;
+        return;
+      } else {
+        showNoneVideo.value = false;
+      }
+
+      videoListByGroup.value.push(...videoListByGroupRes.datas);
+    }
+  }
+  console.log(videoListByGroup.value);
 };
 
 onMounted(async () => {
   const videoGroupListRes = await getVideoGroupList();
   videoGroupList.value = videoGroupListRes.data;
   currentGroup.value = videoGroupListRes.data[0];
-  console.log(currentGroup.value);
-  const videoListByGroupRes = await getVideoListByGroup({
-    id: currentGroup.value.id,
-    cookie: sessionStorage.getItem("cookie"),
-  });
-  console.log(videoListByGroupRes);
+
+  await getVideoListGroup();
+
+  let addEvent = setInterval(() => {
+    if (scrollBar.value !== undefined) {
+      scrollBar.value.addEventListener("scroll", throttle(scrollHandler));
+      clearInterval(addEvent);
+    }
+  }, 500);
+});
+
+onUnmounted(() => {
+  scrollBar.value.removeEventListener("scroll", scrollHandler);
 });
 </script>
 
@@ -178,6 +262,16 @@ onMounted(async () => {
             background-color: #316350;
           }
         }
+      }
+    }
+
+    .none-video {
+      height: calc(100vh - 20rem);
+
+      p {
+        padding-top: 5rem;
+        text-align: center;
+        color: #8b8b8b;
       }
     }
   }

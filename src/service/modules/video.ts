@@ -1,7 +1,16 @@
 // video 相关 api
 import Request from "../api/request";
 import { ApiRes } from "@/types/common-types";
-import { MvUrl, MvDetail, MvDetailInfo, RelatedAllVideo, VideoDetail, VideoUrl, VideoGroup } from "@/types/video-types";
+import { 
+  MvUrl, 
+  MvDetail, 
+  MvDetailInfo, 
+  RelatedAllVideo, 
+  VideoDetail, 
+  VideoUrl, 
+  VideoGrouplist,
+  VideoLists
+} from "@/types/video-types";
 
 // mv 数据
 export const getMvDetail = async (params) => {
@@ -53,14 +62,14 @@ export const getRelatedAllVideo = async (params) => {
 
 // 视频标签列表
 export const getVideoGroupList = async () => {
-  return Request.get<ApiRes<VideoGroup[]>>({
+  return Request.get<ApiRes<VideoGrouplist[]>>({
     url: "/video/group/list",
   })
 }
 
 // 视频标签/分类下的视频
 export const getVideoListByGroup = async (params) => {
-  return Request.get({
+  return Request.get<VideoLists>({
     url: "/video/group",
     params,
   })

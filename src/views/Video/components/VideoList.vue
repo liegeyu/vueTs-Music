@@ -1,22 +1,44 @@
 <template>
   <div class="videoList-container">
-    <template v-for="item in 30" :key="item">
+    <template v-for="(item, index) in videoGroupList" :key="index">
       <div class="video-item">
-        <img class="video-img" src="" alt="" />
+        <img
+          class="video-img"
+          :src="item.data.coverUrl"
+          :alt="item.data.title"
+          @click="clickVideo(item)"
+        />
         <div class="img-des">
-          <span class="des-times">1000</span>
-          <span class="des-duration">10:49</span>
+          <span class="des-times">{{ formatNumber(item.data.playTime) }}</span>
+          <span class="des-duration">{{
+            formatDurationMs(item.data.durationms)
+          }}</span>
         </div>
         <div class="video-des">
-          <p class="video-title">这是标题</p>
-          <p class="video-creator">by {{ "作者" }}</p>
+          <p class="video-title">{{ item.data.title }}</p>
+          <p class="video-creator">by {{ item.data.creator.nickname }}</p>
         </div>
       </div>
     </template>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted, defineProps } from "vue";
+
+import { formatDurationMs, formatNumber } from "@/utils/formatNumber.ts";
+
+defineProps({
+  videoGroupList: {
+    type: Array,
+    defalut: [],
+  },
+});
+
+const clickVideo = () => {};
+
+onMounted(async () => {});
+</script>
 
 <style scoped lang="scss">
 .videoList-container {
@@ -30,6 +52,7 @@
       width: 100%;
       height: 150px;
       border-radius: 1rem;
+      cursor: pointer;
     }
 
     .img-des {
@@ -49,14 +72,22 @@
     }
 
     .video-des {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
       .video-title {
+        display: inline-block;
+        max-width: 20rem;
         color: #d5d5d5;
         padding: 0.5rem 0;
+        cursor: pointer;
       }
 
       .video-creator {
+        display: inline-block;
         color: #555555;
         padding-bottom: 0.5rem;
+        cursor: pointer;
       }
     }
   }

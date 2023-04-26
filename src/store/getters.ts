@@ -1,5 +1,6 @@
 export default {
   menus: (state) => { return state.layout.menus },
+  scrollBar: (state) => { return state.layout.scrollBar },
   qrImg: (state) => { return state.user.qrImg },
   qrState: (state) => { return state.user.qrState },
   userAccount: (state) => { return state.user.account },

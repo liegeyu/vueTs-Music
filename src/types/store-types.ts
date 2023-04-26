@@ -29,6 +29,7 @@ export interface UserState {
 }
 
 export interface LayoutState {
+	scrollBar: HTMLElement | null;
   menus: Menus[];
 }
 

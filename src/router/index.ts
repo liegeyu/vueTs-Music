@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           menu: 'video',
           title: '视频',
-          keepAlive: true,
+          keepAlive: false,
         } 
       },
       {

@@ -40,6 +40,7 @@ export interface VideoGroup {
 	id: number;
 	name: string;
 	type: number;
+	alg?: any;
 }
 
 // getMvUrl
@@ -161,11 +162,98 @@ export interface VideoUrl {
 }
 
 // videogrouplist
-export interface VideoGroup {
+export interface VideoGrouplist {
 	id: number;
 	name: string;
 	url?: any;
 	relatedVideoType?: any;
 	selectTab: boolean;
 	abExtInfo?: any;
+}
+
+// videogroup
+export interface VideoLists {
+	msg: string;
+	code: number;
+	hasmore: boolean;
+	datas: VideoListDatas[];
+	rcmdLimit: number;
+}
+
+export interface VideoListDatas {
+	type: number;
+	displayed: boolean;
+	alg: string;
+	extAlg?: any;
+	data: VideoListData;
+}
+
+export interface VideoListData {
+	alg: string;
+	scm: string;
+	threadId: string;
+	coverUrl: string;
+	height: number;
+	width: number;
+	title: string;
+	description?: any;
+	commentCount: number;
+	shareCount: number;
+	resolutions: Resolution[];
+	creator: CreatorVideoGroup;
+	urlInfo?: any;
+	videoGroup: VideoGroup[];
+	previewUrl: string;
+	previewDurationms: number;
+	hasRelatedGameAd: boolean;
+	markTypes: number[];
+	relateSong: any[];
+	relatedInfo?: any;
+	videoUserLiveInfo?: any;
+	vid: string;
+	durationms: number;
+	playTime: number;
+	praisedCount: number;
+	praised: boolean;
+	subscribed: boolean;
+}
+
+export interface CreatorVideoGroup {
+	defaultAvatar: boolean;
+	province: number;
+	authStatus: number;
+	followed: boolean;
+	avatarUrl: string;
+	accountStatus: number;
+	gender: number;
+	city: number;
+	birthday: number;
+	userId: number;
+	userType: number;
+	nickname: string;
+	signature: string;
+	description: string;
+	detailDescription: string;
+	avatarImgId: number;
+	backgroundImgId: number;
+	backgroundUrl: string;
+	authority: number;
+	mutual: boolean;
+	expertTags?: any;
+	experts: Expert;
+	djStatus: number;
+	vipType: number;
+	remarkName?: any;
+	avatarImgIdStr: string;
+	backgroundImgIdStr: string;
+}
+
+export interface Resolution {
+	resolution: number;
+	size: number;
+}
+
+export interface Expert {
+	1: string;
+	2: string;
 }
