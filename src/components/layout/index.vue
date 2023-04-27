@@ -10,10 +10,6 @@
       <div class="app-content bg-vice" ref="scrollBar">
         <!-- <el-scrollbar> -->
         <div class="main-content">
-          <!-- <keep-alive v-if="$route.meta.keepAlive">
-              <router-view></router-view>
-            </keep-alive>
-            <router-view v-else></router-view> -->
           <router-view v-slot="{ Component }">
             <keep-alive v-if="$route.meta.keepAlive">
               <component :is="Component"></component>
