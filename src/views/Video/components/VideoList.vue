@@ -4,19 +4,34 @@
       <div class="video-item">
         <img
           class="video-img"
-          :src="item.data.coverUrl"
-          :alt="item.data.title"
+          :src="type === 'video' ? item.data.coverUrl : item.cover"
+          :alt="type === 'video' ? item.data.title : item.name"
           @click="clickVideo(item)"
         />
         <div class="img-des">
-          <span class="des-times">{{ formatNumber(item.data.playTime) }}</span>
+          <span class="des-times">{{
+            type === "video"
+              ? formatNumber(item.data.playTime)
+              : formatNumber(item.playCount)
+          }}</span>
           <span class="des-duration">{{
-            formatDurationMs(item.data.durationms)
+            type === "video"
+              ? formatDurationMs(item.data.durationms)
+              : formatDuration(item.duration)
           }}</span>
         </div>
         <div class="video-des">
-          <p class="video-title">{{ item.data.title }}</p>
-          <p class="video-creator">by {{ item.data.creator.nickname }}</p>
+          <p class="video-title">
+            {{ type === "video" ? item.data.title : item.name }}
+          </p>
+          <p class="video-creator">
+            by
+            {{
+              type === "video"
+                ? item.data.creator.nickname
+                : item?.artists[0]?.name
+            }}
+          </p>
         </div>
       </div>
     </template>
@@ -27,25 +42,43 @@
 import { onMounted, defineProps } from "vue";
 import { useRouter } from "vue-router";
 
-import { formatDurationMs, formatNumber } from "@/utils/formatNumber.ts";
+import {
+  formatDuration,
+  formatDurationMs,
+  formatNumber,
+} from "@/utils/formatNumber.ts";
 
-defineProps({
+const props = defineProps({
   videoGroupList: {
     type: Array,
     defalut: [],
+  },
+  type: {
+    type: String,
+    defalut: "video",
   },
 });
 
 const router = useRouter();
 
 const clickVideo = (video) => {
-  router.push({
-    name: "videodetail",
-    query: {
-      type: 0,
-      id: video.data.vid,
-    },
-  });
+  if (props.type === "video") {
+    router.push({
+      name: "videodetail",
+      query: {
+        type: 0,
+        id: video.data.vid,
+      },
+    });
+  } else {
+    router.push({
+      name: "videodetail",
+      query: {
+        type: 1,
+        id: video.id,
+      },
+    });
+  }
 };
 
 onMounted(async () => {});

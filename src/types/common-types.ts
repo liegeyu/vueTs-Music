@@ -8,4 +8,5 @@ export interface ApiRes<T> {
   urls?: T;
   banners?: T;
   message?: string;
+  count?: number;
 }

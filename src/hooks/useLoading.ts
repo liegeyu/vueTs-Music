@@ -18,8 +18,11 @@ export const useLoading = () => {
   }
 
   const hideLoading = () => {
-    loading.visible = false;
-    loading.text = '';
+    setTimeout(() => {
+      loading.visible = false;
+      loading.text = '';
+    }, 200)
+
   }
 
   return {

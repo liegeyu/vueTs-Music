@@ -2,7 +2,8 @@
 import Request from "../api/request";
 import { ApiRes } from "@/types/common-types";
 import { 
-  MvUrl, 
+  MvUrl,
+  MvAll, 
   MvDetail, 
   MvDetailInfo, 
   RelatedAllVideo, 
@@ -11,6 +12,14 @@ import {
   VideoGrouplist,
   VideoLists
 } from "@/types/video-types";
+
+// mvall
+export const getMvAll = async (params) => {
+  return Request.get<ApiRes<MvAll>>({
+    url: "/mv/all",
+    params,
+  })
+}
 
 // mv 数据
 export const getMvDetail = async (params) => {

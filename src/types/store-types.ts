@@ -6,8 +6,8 @@ import { Song, SongUrl } from "./player-types"
 import { UserProfile, Account } from "./user-types"
 import { 
 	MvUrl, 
+	MvAll,
 	MvDetail, 
-	MvDetailInfo, 
 	VideoDetail, 
 	VideoUrl, 
 	RelatedAllVideo 
@@ -71,10 +71,14 @@ export interface VideoDetailState {
 }
 
 export interface VideoState {
+	videoTab: string;
 	selectArea: string;
 	selectKind: string;
 	selectOrder: string;
 	areas: string[];
 	kinds: string[];
 	orders: string[];
+	mvPageNum: number;
+	mvTotal: number;
+	mvData: MvAll[];
 }

@@ -34,6 +34,8 @@ export interface Artist {
 	name: string;
 	img1v1Url: string;
 	followed: boolean;
+	alias?: string[];
+	transNames?: any;
 }
 
 export interface VideoGroup {
@@ -41,6 +43,22 @@ export interface VideoGroup {
 	name: string;
 	type: number;
 	alg?: any;
+}
+
+// mvall
+export interface MvAll {
+	id: number;
+	cover: string;
+	name: string;
+	playCount: number;
+	briefDesc?: any;
+	desc?: any;
+	artistName: string;
+	artistId: number;
+	duration: number;
+	mark: number;
+	subed: boolean;
+	artists: Artist[];
 }
 
 // getMvUrl

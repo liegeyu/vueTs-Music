@@ -1,7 +1,7 @@
 <template>
   <div class="video-container">
     <div class="video-main">
-      <el-tabs v-model="tabValue">
+      <el-tabs v-model="tabValue" @tab-change="changeTab">
         <el-tab-pane lazy label="视频" name="videoBox">
           <div class="video-box">
             <div class="lead-popo">
@@ -28,7 +28,7 @@
             <div class="none-video" v-if="showNoneVideo">
               <p>暂无推荐视频</p>
             </div>
-            <VideoList v-else :videoGroupList="videoListByGroup" />
+            <VideoList v-else type="video" :videoGroupList="videoListByGroup" />
           </div>
         </el-tab-pane>
         <el-tab-pane lazy label="MV" name="mvBox">
@@ -58,9 +58,16 @@ import { throttle } from "@/utils/throttle-debounce";
 
 const store = useStore();
 const scrollBar = computed<HTMLElement>(() => store.getters.scrollBar);
+const tabValue = computed<string>({
+  get: () => {
+    return store.getters.videoTab;
+  },
+  set: (val) => {
+    store.commit("video/setVideoTab", val);
+  },
+});
 
 let videoOffset = ref<number>(0);
-let tabValue = ref<string>("videoBox");
 let showGroupTag = ref<boolean>(false);
 let showNoneVideo = ref<boolean>(false);
 let videoGroupList = ref<VideoGrouplist[]>([]);
@@ -72,6 +79,13 @@ const clickGroupTag = () => {
 };
 
 const changeGroup = async (group) => {
+  if (group.id === 1000 && group.name === "MV") {
+    store.commit("video/setVideoTab", "mvBox");
+    if (showGroupTag.value) {
+      showGroupTag.value = false;
+    }
+    return;
+  }
   currentGroup.value = group;
   videoOffset.value = 0;
   videoListByGroup.value = [];
@@ -103,6 +117,11 @@ const getVideoListGroup = async (first = true) => {
       cookie: sessionStorage.getItem("cookie"),
       offset: videoOffset.value,
     });
+    // 未上传cookie
+    if (videoListByGroupRes.code === 302) {
+      showNoneVideo.value = true;
+      return;
+    }
 
     if (videoListByGroupRes.datas.length === 0) {
       showNoneVideo.value = true;
@@ -117,12 +136,17 @@ const getVideoListGroup = async (first = true) => {
 
     while (num++ <= 3) {
       videoOffset.value++;
-      console.log(videoOffset.value);
       const videoListByGroupRes = await getVideoListByGroup({
         id: currentGroup.value.id,
         cookie: sessionStorage.getItem("cookie"),
         offset: videoOffset.value,
       });
+
+      // 未上传cookie
+      if (videoListByGroupRes.code === 302) {
+        showNoneVideo.value = true;
+        return;
+      }
 
       if (videoListByGroupRes.datas.length === 0) {
         showNoneVideo.value = true;
@@ -134,6 +158,10 @@ const getVideoListGroup = async (first = true) => {
       videoListByGroup.value.push(...videoListByGroupRes.datas);
     }
   }
+};
+
+const changeTab = (value) => {
+  store.commit("video/setVideoTab", value);
 };
 
 onMounted(async () => {

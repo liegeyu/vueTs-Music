@@ -29,10 +29,15 @@ export default {
   videoDetail: (state) => { return state.videodetail.videoDetail },
   videoUrl: (state) => { return state.videodetail.videoUrl },
   relatedAllVideo: (state) => { return state.videodetail.relatedAllVideo },
+  videoTab: (state) => { return state.video.videoTab },
   selectArea: (state) => { return state.video.selectArea },
   selectKind: (state) => { return state.video.selectKind },
   selectOrder: (state) => { return state.video.selectOrder },
   areas: (state) => { return state.video.areas },
   kinds: (state) => { return state.video.kinds },
   orders: (state) => { return state.video.orders },
+  mvData: (state) => { return state.video.mvData },
+  mvPageNum: (state) => { return state.video.mvPageNum },
+  mvTotal: (state) => { return state.video.mvTotal },
+
 }

@@ -34,30 +34,73 @@
         </div>
       </div>
     </div>
-    <div class="mvbox-body"></div>
+    <div class="mvbox-body" v-myLoading="loading.visible">
+      <VideoList type="mv" :videoGroupList="mvData" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs } from "vue";
+import { onMounted, ref, toRefs } from "vue";
 import { useStore } from "vuex";
 
+import VideoList from "./VideoList.vue";
+import { useLoading } from "@/hooks/useLoading";
+
 const store = useStore();
-const { selectArea, selectKind, selectOrder, areas, kinds, orders } = toRefs(
-  store.getters
-);
+const { loading, showLoading, hideLoading } = useLoading();
+const {
+  selectArea,
+  selectKind,
+  selectOrder,
+  areas,
+  kinds,
+  orders,
+  mvPageNum,
+  mvTotal,
+  mvData,
+} = toRefs(store.getters);
+
+let pageNum = ref<number>(0);
 
 const changeArea = (area) => {
+  showLoading();
   store.commit("video/setSelectArea", area);
+  store.commit("video/setMvData", []);
+  fetchStoreMvAll();
+  hideLoading();
 };
 
 const changeKinds = (kind) => {
+  showLoading();
   store.commit("video/setSelectKind", kind);
+  store.commit("video/setMvData", []);
+  fetchStoreMvAll();
+  hideLoading();
 };
 
 const changeOrders = (order) => {
+  showLoading();
   store.commit("video/setSelectOrder", order);
+  store.commit("video/setMvData", []);
+  fetchStoreMvAll();
+  hideLoading();
 };
+
+const fetchStoreMvAll = () => {
+  store.dispatch("video/fetchMvAll", {
+    area: selectArea.value,
+    type: selectKind.value,
+    order: selectOrder.value,
+    cookie: sessionStorage.getItem("cookie"),
+    limit: 48,
+    offset: pageNum.value,
+  });
+};
+
+onMounted(() => {
+  fetchStoreMvAll();
+});
 </script>
 
 <style scoped lang="scss">
