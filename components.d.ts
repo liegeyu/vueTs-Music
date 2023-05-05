@@ -12,6 +12,8 @@ declare module '@vue/runtime-core' {
     Comment: typeof import('./src/components/common/Comment.vue')['default']
     CommentItem: typeof import('./src/components/common/CommentItem.vue')['default']
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']

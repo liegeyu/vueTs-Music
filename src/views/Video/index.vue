@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, reactive } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 import VideoList from "./components/VideoList.vue";
 import MvBox from "./components/MvBox.vue";
@@ -57,6 +58,7 @@ import {
 import { throttle } from "@/utils/throttle-debounce";
 
 const store = useStore();
+const route = useRoute();
 const scrollBar = computed<HTMLElement>(() => store.getters.scrollBar);
 const tabValue = computed<string>({
   get: () => {
@@ -96,6 +98,9 @@ const changeGroup = async (group) => {
 };
 
 const scrollHandler = async (e) => {
+  if (route.meta?.menu !== "video") {
+    return;
+  }
   const el = e.target as HTMLElement;
   let elScrollTop = el.scrollTop;
   let clientHeight = document.documentElement.clientHeight;
@@ -108,6 +113,7 @@ const scrollHandler = async (e) => {
 
 // 获取一组 video
 const getVideoListGroup = async (first = true) => {
+  if (tabValue.value === "mvBox") return;
   if (!first) {
     videoOffset.value++;
     console.log(videoOffset.value);
@@ -180,7 +186,7 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  scrollBar.value.removeEventListener("scroll", scrollHandler);
+  scrollBar.value.removeEventListener("scroll", throttle(scrollHandler));
 });
 </script>
 

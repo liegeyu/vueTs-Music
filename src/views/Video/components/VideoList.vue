@@ -17,7 +17,7 @@
           <span class="des-duration">{{
             type === "video"
               ? formatDurationMs(item.data.durationms)
-              : formatDuration(item.duration)
+              : formatDurationMs(item.duration)
           }}</span>
         </div>
         <div class="video-des">

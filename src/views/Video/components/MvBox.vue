@@ -36,12 +36,23 @@
     </div>
     <div class="mvbox-body" v-myLoading="loading.visible">
       <VideoList type="mv" :videoGroupList="mvData" />
+      <div class="pagination">
+        <el-pagination
+          small
+          background
+          v-model:current-page="mvPageNum"
+          layout="prev, pager, next"
+          :total="mvTotal"
+          :page-size="48"
+          @current-change="changePage"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from "vue";
+import { onMounted, ref, toRefs, computed } from "vue";
 import { useStore } from "vuex";
 
 import VideoList from "./VideoList.vue";
@@ -56,16 +67,34 @@ const {
   areas,
   kinds,
   orders,
-  mvPageNum,
   mvTotal,
   mvData,
 } = toRefs(store.getters);
 
-let pageNum = ref<number>(0);
+let pageNum = ref<number>(1);
+
+const mvPageNum = computed({
+  get: () => {
+    return store.getters.mvPageNum;
+  },
+  set: (val) => {
+    changePage(val);
+  },
+});
+
+const changePage = async (newPage) => {
+  pageNum.value = newPage;
+  showLoading();
+  store.commit("video/setMvPageNum", pageNum.value);
+  store.commit("video/setMvData", []);
+  fetchStoreMvAll();
+  hideLoading();
+};
 
 const changeArea = (area) => {
   showLoading();
   store.commit("video/setSelectArea", area);
+  store.commit("video/setMvPageNum", 1);
   store.commit("video/setMvData", []);
   fetchStoreMvAll();
   hideLoading();
@@ -74,6 +103,7 @@ const changeArea = (area) => {
 const changeKinds = (kind) => {
   showLoading();
   store.commit("video/setSelectKind", kind);
+  store.commit("video/setMvPageNum", 1);
   store.commit("video/setMvData", []);
   fetchStoreMvAll();
   hideLoading();
@@ -82,6 +112,7 @@ const changeKinds = (kind) => {
 const changeOrders = (order) => {
   showLoading();
   store.commit("video/setSelectOrder", order);
+  store.commit("video/setMvPageNum", 1);
   store.commit("video/setMvData", []);
   fetchStoreMvAll();
   hideLoading();
@@ -94,12 +125,14 @@ const fetchStoreMvAll = () => {
     order: selectOrder.value,
     cookie: sessionStorage.getItem("cookie"),
     limit: 48,
-    offset: pageNum.value,
+    offset: (mvPageNum.value - 1) * 48,
   });
 };
 
 onMounted(() => {
+  showLoading();
   fetchStoreMvAll();
+  hideLoading();
 });
 </script>
 
@@ -142,6 +175,11 @@ onMounted(() => {
   }
 
   .mvbox-body {
+    .pagination {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
   }
 }
 </style>

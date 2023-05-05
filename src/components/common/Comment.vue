@@ -98,7 +98,6 @@ let pageSize = 20;
 
 const changePage = async (newPage) => {
   currentCommentPage.value = newPage;
-  console.log("change page", currentCommentPage.value);
 
   showLoading();
   await loadingComment(

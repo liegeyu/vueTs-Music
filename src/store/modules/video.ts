@@ -14,7 +14,7 @@ const VideoStore: Module<VideoState, RootState> = {
     areas: ["全部", "内地", "港台", "欧美", "韩国", "日本"],
     kinds: ["全部", "官方版", "原声", "现场版", "网易出品"],
     orders: ["上升最快", "最热", "最新"],
-    mvPageNum: 0,
+    mvPageNum: 1,
     mvTotal: 0,
     mvData: [] as MvAll[],
   },
@@ -44,7 +44,9 @@ const VideoStore: Module<VideoState, RootState> = {
   actions: {
     async fetchMvAll({ commit }, params) {
       const res = await getMvAll(params);
-      commit("setMvTotal", res.count);
+      if (res.count !== undefined) {
+        commit("setMvTotal", res.count);
+      }
       commit("setMvData", res.data);
     }
   }
