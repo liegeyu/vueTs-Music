@@ -50,8 +50,8 @@ watch(
 );
 
 const changeMenu = async (menu: MenuItem) => {
-  await router.push(menu.key);
-  // currentKey.value = menu.key;
+  await router.push({ path: `/${menu.key}`, replace: true });
+  currentKey.value = menu.key;
 };
 
 onMounted(() => {

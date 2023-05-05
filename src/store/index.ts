@@ -9,6 +9,7 @@ import player from './modules/player';
 import playlist from './modules/playlist';
 import videodetail from './modules/videodetail';
 import video from './modules/video';
+import music from './modules/music';
 
 const store: Store<RootState> = createStore ({
   modules: {
@@ -17,6 +18,7 @@ const store: Store<RootState> = createStore ({
     search,
     player,
     playlist,
+    music,
     video,
     videodetail,
   },

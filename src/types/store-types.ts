@@ -82,3 +82,7 @@ export interface VideoState {
 	mvTotal: number;
 	mvData: MvAll[];
 }
+
+export interface MusicState {
+	
+}

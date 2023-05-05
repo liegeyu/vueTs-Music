@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw, Router } from 'vue-
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: '/',
+    name: 'home',
     redirect: '/home',
     component: () => import('@/components/layout/index.vue'),
     children: [
@@ -20,10 +20,48 @@ const routes: RouteRecordRaw[] = [
         path: '/music',
         name: 'music',
         component: () => import('@/views/Music/index.vue'),
+        redirect: { name: 'rankinglist' },
         meta: {
           menu: 'music',
         },
-        children: []
+        children: [
+          {
+            path: 'rankinglist',
+            name: 'rankinglist',
+            component: () => import('@/views/Music/components/RankingList.vue'),
+            meta: {
+              name: 'rankinglist',
+              keepAlive: true,
+            },
+          },
+          {
+            path: 'customize',
+            name: 'customize',
+            component: () => import('@/views/Music/components/Customize.vue'),
+            meta: {
+              name: 'customize',
+              keepAlive: true,
+            },
+          },
+          {
+            path: 'songlist',
+            name: 'songlist',
+            component: () => import('@/views/Music/components/SongList.vue'),
+            meta: {
+              name: 'songlist',
+              keepAlive: true,
+            },
+          },
+          {
+            path: 'singerlist',
+            name: 'singerlist',
+            component: () => import('@/views/Music/components/SingerList.vue'),
+            meta: {
+              name: 'singerlist',
+              keepAlive: true,
+            },
+          },
+        ]
       },
       {
         path: '/video',

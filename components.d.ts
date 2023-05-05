@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']
@@ -35,6 +36,7 @@ declare module '@vue/runtime-core' {
     SearchPopo: typeof import('./src/components/layout/header/components/SearchPopo.vue')['default']
     SearchSuggest: typeof import('./src/components/layout/header/components/SearchSuggest.vue')['default']
     SlideShow: typeof import('./src/components/common/SlideShow.vue')['default']
+    SongCard: typeof import('./src/components/common/SongCard.vue')['default']
     UserLogin: typeof import('./src/components/layout/header/components/UserLogin.vue')['default']
   }
 }
