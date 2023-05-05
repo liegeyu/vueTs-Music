@@ -454,3 +454,45 @@ export interface Song {
 	mMusic: MMusic;
 	lMusic: LMusic;
 }
+
+// getHighQuality
+export interface HignQualityTag {
+	id: number;
+	name: string;
+	type: number;
+	category: number;
+	hot: boolean;
+}
+
+// getPlaylistHotTag
+export interface PlaylistHotTags {
+  tags: PlaylistHotTag[];
+  code: number;
+}
+
+export interface PlaylistHotTag {
+	playlistTag: PlaylistTag;
+	activity: boolean;
+	hot: boolean;
+	usedCount: number;
+	position: number;
+	category: number;
+	createTime: number;
+	name: string;
+	id: number;
+	type: number;
+}
+
+export interface PlaylistTag {
+	id: number;
+	name: string;
+	category: number;
+	usedCount: number;
+	type: number;
+	position: number;
+	createTime: number;
+	highQuality: number;
+	highQualityPos: number;
+	officialPos: number;
+}
+
