@@ -96,12 +96,14 @@
     <!-- songlists -->
     <div class="songlist-body">
       <template v-for="playlist in topPlaylists" :key="playlist.id">
-        <SongCard
-          :id="playlist.id"
-          :cardImg="playlist.coverImgUrl"
-          :cardName="playlist.name"
-          :playCount="playlist.playCount"
-        />
+        <div style="margin-bottom: 10px">
+          <SongCard
+            :id="playlist.id"
+            :cardImg="playlist.coverImgUrl"
+            :cardName="playlist.name"
+            :playCount="playlist.playCount"
+          />
+        </div>
       </template>
     </div>
   </div>
@@ -264,7 +266,7 @@ onMounted(async () => {
 
   .songlist-body {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     column-gap: 10px;
   }
 

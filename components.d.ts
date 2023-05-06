@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElPopover: typeof import('element-plus/es')['ElPopover']
+    ElSpace: typeof import('element-plus/es')['ElSpace']
     Footer: typeof import('./src/components/layout/footer/index.vue')['default']
     Header: typeof import('./src/components/layout/header/index.vue')['default']
     IconPark: typeof import('./src/components/common/IconPark.vue')['default']

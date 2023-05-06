@@ -82,7 +82,7 @@ onMounted(async () => {
 
     .before-right {
       flex: 1;
-      padding: 0 2rem;
+      padding-left: 2rem;
 
       .list-box {
         display: flex;
