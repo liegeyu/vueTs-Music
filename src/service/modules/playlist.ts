@@ -5,7 +5,9 @@ import {
   PlayListDetail, 
   TopListDetailAll, 
   HignQualityTag, 
-  PlaylistHotTags 
+  PlaylistHotTags,
+  PlaylistCatlistTags,
+  TopPlaylistHighQuality, 
 } from "@/types/playlist-types";
 import { Song } from "@/types/player-types"
 // 歌单详情
@@ -40,7 +42,7 @@ export const getHighQualityTag = () => {
 
 // 歌单分类
 export const getPlaylistCatlistTag = () => {
-  return Request.get<ApiRes<HignQualityTag[]>>({
+  return Request.get<PlaylistCatlistTags>({
     url: "/playlist/catlist"
   })
 }
@@ -49,5 +51,13 @@ export const getPlaylistCatlistTag = () => {
 export const getPlaylistHotTag = () => {
   return Request.get<PlaylistHotTags>({
     url: "/playlist/hot"
+  })
+}
+
+// 获取精品歌单
+export const getTopPlaylistHighQuality = (params) => {
+  return Request.get<TopPlaylistHighQuality>({
+    url: "/top/playlist/highquality",
+    params
   })
 }

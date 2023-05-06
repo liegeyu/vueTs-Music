@@ -72,6 +72,50 @@
   margin: 0 auto;
 }
 
+.popo-tagbox {
+  width: 700px !important;
+  background-color: #363636 !important;
+  padding: 0 !important;
+
+  .popo-container {
+    color: #d7d7d7;
+    display: flex;
+    flex-direction: column;
+    .popo-header {
+      padding: 1rem 0 1rem 1rem;
+      border-bottom: 1px solid #494949;
+      cursor: pointer;
+    }
+
+    .popo-header.tag-active {
+      color: #34d399;
+    }
+
+    .cate-title {
+      color: #5c5c5c;
+      display: flex;
+      padding: 1rem 2rem;
+
+      .cate-right {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        .cate-box {
+          .tag-more {
+            padding: 0 1.2rem;
+            margin-bottom: 1rem;
+            color: #d7d7d7;
+            cursor: pointer;
+          }
+
+          .tag-more.tag-active {
+            color: #34d399;
+          }
+        }
+      }
+
+    }
+  }
+}
 
 // el-slider
 
