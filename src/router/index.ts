@@ -78,7 +78,15 @@ const routes: RouteRecordRaw[] = [
         name: 'videodetail',
         component: () => import('@/views/VideoDetail/index.vue'),
         meta: {
-          menu: 'videodetail',
+          name: 'videodetail',
+        }
+      },
+      {
+        path: '/artistDetail',
+        name: 'artistDetail',
+        component: () => import('@/views/ArtistDetail/index.vue'),
+        meta: {
+          name: 'artistDetail',
         }
       },
       {

@@ -1,5 +1,5 @@
 <template>
-  <div>未查到接口，敬请期待</div>
+  <div>相似歌手</div>
 </template>
 
 <script setup lang="ts"></script>
