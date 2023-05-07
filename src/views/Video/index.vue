@@ -98,16 +98,15 @@ const changeGroup = async (group) => {
 };
 
 const scrollHandler = async (e) => {
-  if (route.meta?.menu !== "video") {
-    return;
-  }
-  const el = e.target as HTMLElement;
-  let elScrollTop = el.scrollTop;
-  let clientHeight = document.documentElement.clientHeight;
-  let elHeight = el.scrollHeight;
+  if (route.meta?.menu === "video") {
+    const el = e.target as HTMLElement;
+    let elScrollTop = el.scrollTop;
+    let clientHeight = document.documentElement.clientHeight;
+    let elHeight = el.scrollHeight;
 
-  if (elScrollTop + clientHeight - 100 >= elHeight) {
-    await getVideoListGroup(false);
+    if (elScrollTop + clientHeight - 100 >= elHeight) {
+      await getVideoListGroup(false);
+    }
   }
 };
 
