@@ -88,7 +88,6 @@ const optionChange = (keyName: string, keyValue: number | string) => {
 };
 
 const clickArtist = (singer) => {
-  console.log(singer);
   router.push({
     path: "/artistDetail",
     query: {

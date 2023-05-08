@@ -36,7 +36,6 @@ const introduction = ref<Introduction[]>([]);
 
 onMounted(async () => {
   const artistDescRes = await getArtistDesc({ id: props.singerId });
-  console.log(artistDescRes);
   briefDesc.value = artistDescRes.briefDesc;
   introduction.value = artistDescRes.introduction;
 });

@@ -20,13 +20,16 @@
         :singer-info="singerInfo"
         v-if="currentMenu === 'artistdetail'"
       />
-      <SingerSimilar v-if="currentMenu === 'similarsinger'" />
+      <SingerSimilar
+        :singerId="route.query.singerId"
+        v-if="currentMenu === 'similarsinger'"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import SingerDes from "./components/SingerDes.vue";
@@ -47,10 +50,18 @@ const changeTab = (newTab) => {
   currentMenu.value = newTab;
 };
 
+watch(
+  () => route.query.singerId,
+  async (newId) => {
+    const singerInfoRes = await getArtistDetail({ id: newId });
+    singerInfo.value = singerInfoRes.data.artist;
+    currentMenu.value = "collection";
+  }
+);
+
 onMounted(async () => {
   const singerInfoRes = await getArtistDetail({ id: route.query.singerId });
   singerInfo.value = singerInfoRes.data.artist;
-  console.log(singerInfo);
 });
 </script>
 
