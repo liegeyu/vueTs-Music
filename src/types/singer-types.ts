@@ -214,3 +214,310 @@ export interface ArtistDesc {
   topicData: TopicData[];
   code: number;
 }
+
+// getArtistMvs
+export interface ArtistMvArtist {
+  img1v1Id: number;
+  topicPerson: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  albumSize: number;
+  trans: string;
+  musicSize: number;
+  alias: any[];
+  picId: number;
+  name: string;
+  id: number;
+  img1v1Id_str: string;
+}
+
+export interface ArtistMv {
+  id: number;
+  name: string;
+  status: number;
+  artist: ArtistMvArtist;
+  imgurl16v9: string;
+  imgurl: string;
+  artistName: string;
+  duration: number;
+  playCount: number;
+  publishTime: string;
+  subed: boolean;
+}
+
+export interface ArtistMvs {
+  mvs: ArtistMv[];
+  time: number;
+  hasMore: boolean;
+  code: number;
+}
+
+// getArtistAlbums
+export interface ArtistAlbumsArtist {
+  img1v1Id: number;
+  topicPerson: number;
+  followed: boolean;
+  trans: string;
+  alias: string[];
+  picId: number;
+  musicSize: number;
+  albumSize: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  name: string;
+  id: number;
+  picId_str: string;
+  img1v1Id_str: string;
+}
+
+export interface HotAlbum {
+  songs: any[];
+  paid: boolean;
+  onSale: boolean;
+  mark: number;
+  awardTags?: any;
+  companyId: number;
+  blurPicUrl: string;
+  pic: number;
+  alias: any[];
+  artists: ArtistAlbumsArtist[];
+  copyrightId: number;
+  picId: number;
+  artist: ArtistAlbumsArtist;
+  briefDesc: string;
+  publishTime: number;
+  company: string;
+  picUrl: string;
+  commentThreadId: string;
+  description: string;
+  tags: string;
+  status: number;
+  subType: string;
+  name: string;
+  id: number;
+  type: string;
+  size: number;
+  picId_str: string;
+  isSub: boolean;
+}
+
+export interface ArtistAlbums {
+  artist: ArtistAlbumsArtist;
+  hotAlbums: HotAlbum[];
+  more: boolean;
+  code: number;
+}
+
+// getAlbumContent
+export interface AlbumContent {
+  resourceState: boolean;
+  album: AlbumContentAlbum;
+  songs: AlbumSong[];
+  code: number;
+}
+
+export interface ResourceInfo {
+  id: number;
+  userId: number;
+  name: string;
+  imgUrl: string;
+  creator?: any;
+  encodedId?: any;
+  subTitle?: any;
+  webUrl?: any;
+}
+
+export interface CommentThread {
+  id: string;
+  resourceInfo: ResourceInfo;
+  resourceType: number;
+  commentCount: number;
+  likedCount: number;
+  shareCount: number;
+  hotCount: number;
+  latestLikedUsers?: any;
+  resourceOwnerId: number;
+  resourceTitle: string;
+  resourceId: number;
+}
+
+export interface Info {
+  commentThread: CommentThread;
+  latestLikedUsers?: any;
+  liked: boolean;
+  comments?: any;
+  resourceType: number;
+  resourceId: number;
+  commentCount: number;
+  likedCount: number;
+  shareCount: number;
+  threadId: string;
+}
+
+export interface AlbumContentAlbum {
+  songs: any[];
+  paid: boolean;
+  onSale: boolean;
+  mark: number;
+  awardTags?: any;
+  companyId: number;
+  blurPicUrl: string;
+  alias: any[];
+  artists: ArtistAlbumsArtist[];
+  copyrightId: number;
+  picId: number;
+  artist: ArtistAlbumsArtist;
+  pic: number;
+  publishTime: number;
+  company: string;
+  briefDesc: string;
+  picUrl: string;
+  commentThreadId: string;
+  description: string;
+  tags: string;
+  status: number;
+  subType: string;
+  name: string;
+  id: number;
+  type: string;
+  size: number;
+  picId_str: string;
+  info: Info;
+}
+
+export interface AlbumSong {
+  rtUrls: any[];
+  ar: Ar[];
+  al: Al;
+  st: number;
+  noCopyrightRcmd?: any;
+  songJumpInfo?: any;
+  alia?: any[];
+  pop: number;
+  rt: string;
+  mst: number;
+  cp: number;
+  crbt?: any;
+  cf: string;
+  dt: number;
+  rtUrl?: any;
+  ftype: number;
+  rtype: number;
+  rurl?: any;
+  pst: number;
+  no: number;
+  fee: number;
+  djId: number;
+  mv: number;
+  t: number;
+  v: number;
+  h: H;
+  l: L;
+  sq: Sq;
+  hr: Hr;
+  cd: string;
+  a?: any;
+  m: M;
+  name: string;
+  id: number;
+  privilege: Privilege;
+}
+
+export interface Ar {
+  id: number;
+  name: string;
+  alia: string[];
+}
+
+export interface Al {
+  id: number;
+  name: string;
+  picUrl: string;
+  tns: string[];
+  pic_str: string;
+  pic: number;
+}
+
+export interface H {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+export interface L {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+export interface Sq {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+export interface Hr {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+export interface M {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+export interface FreeTrialPrivilege {
+  resConsumable: boolean;
+  userConsumable: boolean;
+  listenType?: any;
+}
+
+export interface ChargeInfoList {
+  rate: number;
+  chargeUrl?: any;
+  chargeMessage?: any;
+  chargeType: number;
+}
+
+export interface Privilege {
+  id: number;
+  fee: number;
+  payed: number;
+  st: number;
+  pl: number;
+  dl: number;
+  sp: number;
+  cp: number;
+  subp: number;
+  cs: boolean;
+  maxbr: number;
+  fl: number;
+  toast: boolean;
+  flag: number;
+  preSell: boolean;
+  playMaxbr: number;
+  downloadMaxbr: number;
+  maxBrLevel: string;
+  playMaxBrLevel: string;
+  downloadMaxBrLevel: string;
+  plLevel: string;
+  dlLevel: string;
+  flLevel: string;
+  rscl?: any;
+  freeTrialPrivilege: FreeTrialPrivilege;
+  chargeInfoList: ChargeInfoList[];
+}

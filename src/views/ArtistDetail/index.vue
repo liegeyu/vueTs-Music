@@ -13,8 +13,11 @@
       </el-tabs>
     </div>
     <div class="artist-body">
-      <SingerAlbum v-if="currentMenu === 'collection'" />
-      <SingerMv v-if="currentMenu === 'mv'" />
+      <SingerAlbum
+        :singerId="route.query.singerId"
+        v-if="currentMenu === 'collection'"
+      />
+      <SingerMv :singerId="route.query.singerId" v-if="currentMenu === 'mv'" />
       <SingerDetail
         :singerId="route.query.singerId"
         :singer-info="singerInfo"
@@ -54,14 +57,14 @@ watch(
   () => route.query.singerId,
   async (newId) => {
     const singerInfoRes = await getArtistDetail({ id: newId });
-    singerInfo.value = singerInfoRes.data.artist;
+    singerInfo.value = singerInfoRes.data?.artist;
     currentMenu.value = "collection";
   }
 );
 
 onMounted(async () => {
   const singerInfoRes = await getArtistDetail({ id: route.query.singerId });
-  singerInfo.value = singerInfoRes.data.artist;
+  singerInfo.value = singerInfoRes.data?.artist;
 });
 </script>
 

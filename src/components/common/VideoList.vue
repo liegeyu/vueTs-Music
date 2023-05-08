@@ -4,8 +4,20 @@
       <div class="video-item">
         <img
           class="video-img"
-          :src="type === 'video' ? item.data.coverUrl : item.cover"
-          :alt="type === 'video' ? item.data.title : item.name"
+          :src="
+            type === 'video'
+              ? item.data.coverUrl
+              : type === 'mv'
+              ? item.cover
+              : item.imgurl16v9
+          "
+          :alt="
+            type === 'video'
+              ? item.data.title
+              : type === 'mv'
+              ? item.name
+              : item.name
+          "
           @click="clickVideo(item)"
         />
         <div class="img-des">
@@ -29,7 +41,9 @@
             {{
               type === "video"
                 ? item.data.creator.nickname
-                : item?.artists[0]?.name
+                : type === "mv"
+                ? item?.artists[0]?.name
+                : item?.artist?.name
             }}
           </p>
         </div>
@@ -90,7 +104,7 @@ onMounted(async () => {});
   min-width: 1100px;
   margin: 2rem auto 0;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   column-gap: 2rem;
   .video-item {
     .video-img {

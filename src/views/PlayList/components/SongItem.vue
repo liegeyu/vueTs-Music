@@ -83,6 +83,8 @@ const playSong = (song) => {
     width: 6.5rem;
     display: flex;
     color: #565656;
+    padding-left: 1rem;
+
     span {
       flex: 1;
     }

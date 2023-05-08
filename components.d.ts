@@ -12,6 +12,9 @@ declare module '@vue/runtime-core' {
     Comment: typeof import('./src/components/common/Comment.vue')['default']
     CommentItem: typeof import('./src/components/common/CommentItem.vue')['default']
     Drawer: typeof import('./src/components/layout/drawer/index.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopover: typeof import('element-plus/es')['ElPopover']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
@@ -36,5 +39,6 @@ declare module '@vue/runtime-core' {
     SlideShow: typeof import('./src/components/common/SlideShow.vue')['default']
     SongCard: typeof import('./src/components/common/SongCard.vue')['default']
     UserLogin: typeof import('./src/components/layout/header/components/UserLogin.vue')['default']
+    VideoList: typeof import('./src/components/common/VideoList.vue')['default']
   }
 }

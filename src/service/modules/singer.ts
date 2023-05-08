@@ -7,6 +7,9 @@ import {
   ArtistDetail,
   ArtistDesc,
   Artist,
+  ArtistMvs,
+  ArtistAlbums,
+  AlbumContent,
 } from "@/types/singer-types";
 
 // 歌手列表
@@ -37,6 +40,30 @@ export function getArtistDesc(params) {
 export function getSimilarArtist(params) {
   return Request.get<{ artists: Artist[] }>({
     url: "/simi/artist",
+    params,
+  });
+}
+
+// 获取歌手 mv
+export function getArtistMvs(params) {
+  return Request.get<ArtistMvs>({
+    url: "/artist/mv",
+    params,
+  });
+}
+
+// 获取歌手专辑
+export function getArtistAlbums(params) {
+  return Request.get<ArtistAlbums>({
+    url: "/artist/album",
+    params,
+  });
+}
+
+// 获取专辑内容
+export function getAlbumContent(params) {
+  return Request.get<AlbumContent>({
+    url: "/album",
     params,
   });
 }

@@ -44,7 +44,7 @@ import { ref, onMounted, onUnmounted, computed, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
-import VideoList from "./components/VideoList.vue";
+import VideoList from "@/components/common/VideoList.vue";
 import MvBox from "./components/MvBox.vue";
 import {
   VideoLists,

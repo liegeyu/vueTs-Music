@@ -17,8 +17,7 @@
 import { onMounted, ref, defineProps } from "vue";
 
 import { getArtistDesc } from "@/service/modules/singer";
-import { Introduction } from "@/types/singer-types";
-import { ArtistDetailArtist } from "@/types/singer-types";
+import { Introduction, ArtistDetailArtist } from "@/types/singer-types";
 
 const props = defineProps({
   singerId: {

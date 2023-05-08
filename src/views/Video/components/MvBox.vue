@@ -55,7 +55,7 @@
 import { onMounted, ref, toRefs, computed } from "vue";
 import { useStore } from "vuex";
 
-import VideoList from "./VideoList.vue";
+import VideoList from "@/components/common/VideoList.vue";
 import { useLoading } from "@/hooks/useLoading";
 
 const store = useStore();

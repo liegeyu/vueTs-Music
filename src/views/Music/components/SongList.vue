@@ -178,10 +178,6 @@ onMounted(async () => {
   topPlaylists.value = topPlaylistHighQualityRes.playlists;
 
   activeTag.value = playlistCatlistTagAll.value;
-
-  console.log(playlistHotTagRes.tags);
-  console.log(playlistCatlistTagRes);
-  console.log(topPlaylistHighQualityRes);
 });
 </script>
 
